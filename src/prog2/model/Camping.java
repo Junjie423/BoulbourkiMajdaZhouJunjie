@@ -13,12 +13,23 @@ public class Camping implements InCamping {
     public Camping(String nom) {
         this.nom = nom;
         this.allojaments = new ArrayList<>();
+        this.clients = new ArrayList<>();
+        this.reserves = new ArrayList<>();
     }
+    /**
+     * Retorna el nom del càmping.
+     * @return el nom del càmping.
+     */
     public String getNom() {
         return nom;
     }
+
+    /**
+     * Retorna la llista de reserves del camping.
+     * @return
+     */
     public LlistaReserves getLlistaReserves() {
-        return reserves;
+        return null;
     }
 
     /**
