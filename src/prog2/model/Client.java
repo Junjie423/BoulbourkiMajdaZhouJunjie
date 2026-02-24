@@ -1,6 +1,6 @@
 package prog2.model;
 
-public class Client {
+public class Client implements InClient {
     private String nom;
     private String dni;
     public Client(String nom, String dni){
