@@ -1,5 +1,3 @@
-package prog2;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import prog2.vista.ExcepcioReserva;
