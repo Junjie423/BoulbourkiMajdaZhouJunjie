@@ -3,7 +3,17 @@ package prog2.model;
 import java.time.LocalDate;
 
 public class Reserva implements InReserva {
-    //Faltan atributos y constructror
+    //Atributs de reserva
+    private String id, dni;
+    private LocalDate dataEntrada, dataSortida;
+
+    // Constructor
+    public Reserva(String id_, String dni_, LocalDate dataEntrada, LocalDate dataSortida){
+        this.id = id_;
+        this.dni = dni_;
+        this.dataEntrada = dataEntrada;
+        this.dataSortida = dataSortida;
+    }
 
     @Override
     public Allotjament getAllotjament_() {

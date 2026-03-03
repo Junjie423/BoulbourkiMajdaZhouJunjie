@@ -148,7 +148,7 @@ public class Camping implements InCamping {
      */
     @Override
     public void afegirBungalowPremium(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, int placesParquing, boolean terrassa, boolean tv, boolean aireFred, boolean serveisExtra, String codiWifi) {
-        BungalowPremium nouBungalouPre = BungalowPremium(nom_, idAllotjament_, mida, habitacions, placesPersones, placesParquing, terrassa, tv, aireFred, serveisExtra, codiWifi);
+        BungalowPremium nouBungalouPre = new BungalowPremium(nom_, idAllotjament_, mida, habitacions, placesPersones, placesParquing, terrassa, tv, aireFred, serveisExtra, codiWifi);
         this.allotjaments.add(nouBungalouPre);
     }
 
@@ -166,7 +166,7 @@ public class Camping implements InCamping {
      */
     @Override
     public void afegirGlamping(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, String material, boolean casaMascota) {
-        Glamping nouGlamping = Glamping(nom_, idAllotjament_, mida, habitacions, placesPersones, material, casaMascota);
+        Glamping nouGlamping = new Glamping(nom_, idAllotjament_, mida, habitacions, placesPersones, material, casaMascota);
         this.allotjaments.add(nouGlamping);
     }
 
@@ -183,7 +183,7 @@ public class Camping implements InCamping {
      */
     @Override
     public void afegirMobilHome(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, boolean terrassaBarbacoa) {
-        MobilHome nouMobilHome = MobilHome(nom_, idAllotjament_, mida, habitacions, placesPersones, terrassaBarbacoa);
+        MobilHome nouMobilHome = new MobilHome(nom_, idAllotjament_, mida, habitacions, placesPersones, terrassaBarbacoa);
         this.allotjaments.add(nouMobilHome);
     }
 
@@ -198,7 +198,7 @@ public class Camping implements InCamping {
      */
     @Override
     public void afegirReserva(String id_, String dni_, LocalDate dataEntrada, LocalDate dataSortida) throws ExcepcioReserva {
-        Reserva nouReserva = Reserva(id_, dni_, dataEntrada, dataSortida);
+        Reserva nouReserva = new Reserva(id_, dni_, dataEntrada, dataSortida);
         this.reserves.add(nouReserva);
     }
 
@@ -231,7 +231,7 @@ public class Camping implements InCamping {
      */
     public Allotjament buscarAllotjament(String id_){
         Iterator itrAllotjaments = allotjaments.iterator();
-        While (itrAllotjaments.hasNext()){
+        while (itrAllotjaments.hasNext()){
             Allotjament a = (Allotjament) itrAllotjaments.next();
             if (a.getId().equals(id_)){
                 return a;
