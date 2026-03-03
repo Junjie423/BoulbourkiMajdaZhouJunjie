@@ -4,24 +4,29 @@ import prog2.vista.ExcepcioReserva;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Camping implements InCamping {
+    // Atributs de Camping
     private String nom;
-    private ArrayList<Allotjament> allojaments;
+    private ArrayList<Allotjament> allotjaments;
     private ArrayList<Client> clients;
     private ArrayList<Reserva> reserves;
+    // Constructor
     public Camping(String nom) {
         this.nom = nom;
-        this.allojaments = new ArrayList<>();
+        this.allotjaments = new ArrayList<>();
         this.clients = new ArrayList<>();
         this.reserves = new ArrayList<>();
     }
+
+    // Mètodes de la classe camping
     /**
      * Retorna el nom del càmping.
      * @return el nom del càmping.
      */
     public String getNom() {
-        return nom;
+        return this.nom;
     }
 
     /**
@@ -37,7 +42,7 @@ public class Camping implements InCamping {
      */
     @Override
     public ArrayList<Allotjament> getLlistaAllotjaments() {
-        return null;
+        return allotjaments;
     }
 
     /**
@@ -47,7 +52,7 @@ public class Camping implements InCamping {
      */
     @Override
     public ArrayList<Client> getLlistaClients() {
-        return null;
+        return clients;
     }
 
     /**
@@ -57,7 +62,7 @@ public class Camping implements InCamping {
      */
     @Override
     public int getNumAllotjaments() {
-        return 0;
+        return allotjaments.size();
     }
 
     /**
@@ -67,7 +72,7 @@ public class Camping implements InCamping {
      */
     @Override
     public int getNumReserves() {
-        return 0;
+        return reserves.size();
     }
 
     /**
@@ -77,7 +82,7 @@ public class Camping implements InCamping {
      */
     @Override
     public int getNumClients() {
-        return 0;
+        return clients.size();
     }
 
     /**
@@ -88,7 +93,8 @@ public class Camping implements InCamping {
      */
     @Override
     public void afegirClient(String nom_, String dni_) {
-
+        Client nouClient = new Client(nom_, dni_);
+        this.clients.add(nouClient);
     }
 
     /**
@@ -101,7 +107,8 @@ public class Camping implements InCamping {
      */
     @Override
     public void afegirParcela(String nom_, String idAllotjament_, float metres, boolean connexioElectrica) {
-
+        Parcela nouParcela = new Parcela(nom_, idAllotjament_, metres, connexioElectrica);
+        this.allotjaments.add(nouParcela);
     }
 
     /**
@@ -119,7 +126,8 @@ public class Camping implements InCamping {
      */
     @Override
     public void afegirBungalow(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, int placesParquing, boolean terrassa, boolean tv, boolean aireFred) {
-
+        Bungalow nouBungalou = new Bungalow(nom_, idAllotjament_, mida, habitacions, placesPersones, placesParquing, terrassa, tv, aireFred);
+        this.allotjaments.add(nouBungalou);
     }
 
     /**
@@ -140,7 +148,8 @@ public class Camping implements InCamping {
      */
     @Override
     public void afegirBungalowPremium(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, int placesParquing, boolean terrassa, boolean tv, boolean aireFred, boolean serveisExtra, String codiWifi) {
-
+        BungalowPremium nouBungalouPre = BungalowPremium(nom_, idAllotjament_, mida, habitacions, placesPersones, placesParquing, terrassa, tv, aireFred, serveisExtra, codiWifi);
+        this.allotjaments.add(nouBungalouPre);
     }
 
     /**
@@ -157,7 +166,8 @@ public class Camping implements InCamping {
      */
     @Override
     public void afegirGlamping(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, String material, boolean casaMascota) {
-
+        Glamping nouGlamping = Glamping(nom_, idAllotjament_, mida, habitacions, placesPersones, material, casaMascota);
+        this.allotjaments.add(nouGlamping);
     }
 
     /**
@@ -173,7 +183,8 @@ public class Camping implements InCamping {
      */
     @Override
     public void afegirMobilHome(String nom_, String idAllotjament_, String mida, int habitacions, int placesPersones, boolean terrassaBarbacoa) {
-
+        MobilHome nouMobilHome = MobilHome(nom_, idAllotjament_, mida, habitacions, placesPersones, terrassaBarbacoa);
+        this.allotjaments.add(nouMobilHome);
     }
 
     /**
@@ -187,7 +198,8 @@ public class Camping implements InCamping {
      */
     @Override
     public void afegirReserva(String id_, String dni_, LocalDate dataEntrada, LocalDate dataSortida) throws ExcepcioReserva {
-
+        Reserva nouReserva = Reserva(id_, dni_, dataEntrada, dataSortida);
+        this.reserves.add(nouReserva);
     }
 
     /**
@@ -208,6 +220,53 @@ public class Camping implements InCamping {
      */
     @Override
     public Allotjament getAllotjamentEstadaMesCurta(InAllotjament.Temp temp) {
+        return null;
+    }
+
+    /**
+     * Cerca i retorna l'allotjament que es demana de la llista amb el id_.
+     *
+     * @param id_
+     * @return l'allotjament corresponent al id_.
+     */
+    public Allotjament buscarAllotjament(String id_){
+        Iterator itrAllotjaments = allotjaments.iterator();
+        While (itrAllotjaments.hasNext()){
+            Allotjament a = (Allotjament) itrAllotjaments.next();
+            if (a.getId().equals(id_)){
+                return a;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Cerca i retorna el client demanat en la llista amb el dni_.
+     *
+     * @param dni_
+     * @return el client corresponent ak dni_.
+     */
+    public Client buscarClient(String dni_){
+        Iterator itrClients = clients.iterator();
+        while (itrClients.hasNext()){
+            Client c = (Client) itrClients.next();
+            if (c.getDni().equals(dni_)){
+                return c;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * retorna la temporada corresponent a la data passada com a paràmetre.
+     *
+     * @param data
+     * @return l'allotjament amb estada mínima de la temporada baixa més curta.
+     */
+    public static InAllotjament.Temp getTemporada(LocalDate data){
+        int dia = data.getDayOfMonth();
+        int mes = data.getMonthValue();
+
         return null;
     }
 }

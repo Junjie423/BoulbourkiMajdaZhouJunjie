@@ -1,7 +1,20 @@
 package prog2.model;
 
 public class Allotjament implements InAllotjament{
+    // Atributs de la classe Allotjament
+    private String nom_;
+    private String id_;
+    private long estadaMinimaAlta;
+    private long estadaMinimaBaixa;
+    private Temp temporada;
 
+    // Constructor
+    public Allotjament(String nom, String id){
+        this.nom_ = nom;
+        this.id_ = id;
+    }
+
+    // Mètodes de la classe Allotjament
     /**
      * Obté el nom de l'allotjament.
      *
@@ -9,7 +22,7 @@ public class Allotjament implements InAllotjament{
      */
     @Override
     public String getNom() {
-        return "";
+        return this.nom_;
     }
 
     /**
@@ -19,7 +32,7 @@ public class Allotjament implements InAllotjament{
      */
     @Override
     public void setNom(String nom) {
-
+        this.nom_ = nom;
     }
 
     /**
@@ -29,7 +42,7 @@ public class Allotjament implements InAllotjament{
      */
     @Override
     public String getId() {
-        return "";
+        return this.id_;
     }
 
     /**
@@ -39,7 +52,7 @@ public class Allotjament implements InAllotjament{
      */
     @Override
     public void setId(String id) {
-
+        this.id_ = id;
     }
 
     /**
@@ -50,7 +63,16 @@ public class Allotjament implements InAllotjament{
      */
     @Override
     public long getEstadaMinima(Temp temp) {
-        return 0;
+        long tmp = 0;
+        switch(temp){
+            case ALTA:
+                tmp = this.estadaMinimaAlta;
+                break;
+            case BAIXA:
+                tmp = this.estadaMinimaBaixa;
+                break;
+        }
+        return tmp;
     }
 
     /**
@@ -61,7 +83,8 @@ public class Allotjament implements InAllotjament{
      */
     @Override
     public void setEstadaMinima(long estadaMinimaALTA_, long estadaMinimaBAIXA_) {
-
+        this.estadaMinimaAlta = estadaMinimaALTA_;
+        this.estadaMinimaBaixa = estadaMinimaBAIXA_;
     }
 
     /**
