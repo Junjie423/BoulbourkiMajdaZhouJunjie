@@ -3,11 +3,18 @@ package prog2.model;
 import prog2.vista.ExcepcioReserva;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class LlistaReserves implements InLlistaReserves{
-    // Falta atributs i constructor
+    // Atributs de LlistaReserves
+    private ArrayList<Reserva> reserves_;
 
+    // Constructor
+    public LlistaReserves(){
+        this.reserves_ = new ArrayList<>();
+    }
 
+    // Mètodes de LlistaReserves
     /**
      * Comprova que l'estada que es demani sigui més llarga o igual que l'estada mínima.
      * Comprova que l'allotjament estigui disponible pels dies indicats.
@@ -22,6 +29,7 @@ public class LlistaReserves implements InLlistaReserves{
      */
     @Override
     public void afegirReserva(Allotjament allotjament, Client client, LocalDate dataEntrada, LocalDate dataSortida) throws ExcepcioReserva {
+        Reserva nouReserva = new Reserva(allotjament, client, dataEntrada, dataSortida);
 
     }
 
@@ -32,6 +40,6 @@ public class LlistaReserves implements InLlistaReserves{
      */
     @Override
     public int getNumReserves() {
-        return 0;
+        return this.reserves_.size();
     }
 }

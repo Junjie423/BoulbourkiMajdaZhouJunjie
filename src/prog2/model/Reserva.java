@@ -3,14 +3,15 @@ package prog2.model;
 import java.time.LocalDate;
 
 public class Reserva implements InReserva {
-    //Atributs de reserva
-    private String id, dni;
-    private LocalDate dataEntrada, dataSortida;
-
+    // Atributs de reserva
+    private Allotjament allotjament;
+    private Client client;
+    private LocalDate dataEntrada;
+    private LocalDate dataSortida;
     // Constructor
-    public Reserva(String id_, String dni_, LocalDate dataEntrada, LocalDate dataSortida){
-        this.id = id_;
-        this.dni = dni_;
+    public Reserva(Allotjament allotjament_, Client client_, LocalDate dataEntrada, LocalDate dataSortida){
+        this.allotjament = allotjament_;
+        this.client = client_;
         this.dataEntrada = dataEntrada;
         this.dataSortida = dataSortida;
     }

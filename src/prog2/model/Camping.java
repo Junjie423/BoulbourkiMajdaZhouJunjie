@@ -198,8 +198,10 @@ public class Camping implements InCamping {
      */
     @Override
     public void afegirReserva(String id_, String dni_, LocalDate dataEntrada, LocalDate dataSortida) throws ExcepcioReserva {
-        Reserva nouReserva = new Reserva(id_, dni_, dataEntrada, dataSortida);
-        this.reserves.afegirReserva();
+        Allotjament allotjamentTrobat = buscarAllotjament(id_);
+        Client clientTrobat = buscarClient(dni_);
+        Reserva nouReserva = new Reserva(allotjamentTrobat, clientTrobat, dataEntrada, dataSortida);
+        this.reserves.afegirReserva(nouReserva);
     }
 
     /**
@@ -209,7 +211,15 @@ public class Camping implements InCamping {
      */
     @Override
     public int calculAllotjamentsOperatius() {
-        return 0;
+        int numOperatius = 0;
+        Iterator itrAllotjaments = this.allotjaments.iterator();
+        while (itrAllotjaments.hasNext()) {
+            Allotjament a =  (Allotjament) itrAllotjaments.next();
+            if (a.correcteFuncionament()){
+                numOperatius++;
+            }
+        }
+        return numOperatius;
     }
 
     /**
@@ -220,7 +230,18 @@ public class Camping implements InCamping {
      */
     @Override
     public Allotjament getAllotjamentEstadaMesCurta(InAllotjament.Temp temp) {
-        return null;
+        Allotjament allotjamentMesCurt = null;
+        Iterator itrAllotjaments = this.allotjaments.iterator();
+        long estadaMinMesCurta = 99999;
+        while (itrAllotjaments.hasNext()) {
+            Allotjament a = (Allotjament) itrAllotjaments.next();
+            long estadaMinima = a.getEstadaMinima(temp);
+            if (estadaMinima < estadaMinMesCurta) {
+                estadaMinMesCurta = estadaMinima;
+                allotjamentMesCurt = a;
+            }
+        }
+        return allotjamentMesCurt;
     }
 
     /**
@@ -266,8 +287,14 @@ public class Camping implements InCamping {
     public static InAllotjament.Temp getTemporada(LocalDate data){
         int dia = data.getDayOfMonth();
         int mes = data.getMonthValue();
+        InAllotjament.Temp temp = null;
 
-        return null;
+        if (mes == 3 && dia >= 21 || mes > 3 && mes < 9 || mes == 9 && dia <= 20){
+            temp = InAllotjament.Temp.ALTA;
+        } else{
+            temp = InAllotjament.Temp.BAIXA;
+        }
+        return temp;
     }
 }
 
