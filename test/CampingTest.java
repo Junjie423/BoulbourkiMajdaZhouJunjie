@@ -1,7 +1,8 @@
-package prog2.model;
-
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import prog2.model.Camping;
+import prog2.model.InAllotjament;
 import prog2.vista.ExcepcioReserva;
 
 import java.time.LocalDate;
@@ -119,7 +120,7 @@ public class CampingTest {
     @Test
     void testGetTemporadaAlta() {
         LocalDate data = LocalDate.of(2026, 7, 15);
-        assertEquals(InAllotjament.Temp.ALTA, Camping.getTemporada(data));
+        Assertions.assertEquals(InAllotjament.Temp.ALTA, Camping.getTemporada(data));
     }
 
     @Test

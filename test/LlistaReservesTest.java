@@ -1,11 +1,13 @@
-package prog2.model;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 
+import prog2.model.Allotjament;
+import prog2.model.Client;
+import prog2.model.LlistaReserves;
+import prog2.model.Parcela;
 import prog2.vista.ExcepcioReserva;
 
 public class LlistaReservesTest {
