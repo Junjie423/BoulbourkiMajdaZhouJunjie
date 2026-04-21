@@ -20,7 +20,7 @@ public class Llista<T> implements Serializable {
      * Retornar nombre d'elements continguts a la llista
      */
     public int getSize() {
-          // TO-BE-DONE
+          return this.llista.size();
     }
 
     /**
