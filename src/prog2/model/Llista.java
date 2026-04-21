@@ -9,7 +9,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import prog2.vista.BiblioException;
 
-public class Llista<T> implements Serializable {
+/**
+ * Autor: Junjie Zhou, Majda Boulbourki
+ *
+ * (Descripcio)
+ */
+public class Llista<T> implements InLlista, Serializable {
    protected ArrayList<T> llista;
 
    public Llista() {
@@ -65,4 +70,5 @@ public class Llista<T> implements Serializable {
         ArrayList<T> arrlist = new ArrayList<>(llista);
         return arrlist;
     }
+
 }
