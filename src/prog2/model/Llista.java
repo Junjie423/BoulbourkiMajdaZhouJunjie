@@ -24,6 +24,7 @@ public class Llista<T> implements InLlista, Serializable {
     /**
      * Retornar nombre d'elements continguts a la llista
      */
+    @Override
     public int getSize() {
           return this.llista.size();
     }
@@ -31,6 +32,7 @@ public class Llista<T> implements InLlista, Serializable {
     /**
      * Afegir element a la llista. Afegeix l'element t a la llista
      */
+    @Override
     public void afegir(T t) throws BiblioException {
           // TO-BE-DONE
     }
@@ -38,6 +40,7 @@ public class Llista<T> implements InLlista, Serializable {
     /**
      * Esborrar element de la llista. Esborra l'element t a la llista
      */
+    @Override
     public void esborrar(T t) {
           // TO-BE-DONE
     }
@@ -45,6 +48,7 @@ public class Llista<T> implements InLlista, Serializable {
     /**
      * Retornar element de la llista a la posició position
      */
+    @Override
     public T getAt(int position) {
           // TO-BE-DONE
     }
@@ -52,6 +56,7 @@ public class Llista<T> implements InLlista, Serializable {
     /**
      * Buidar tots el elements de la llista
      */
+    @Override
     public void clear() {
           // TO-BE-DONE
     }
@@ -59,13 +64,15 @@ public class Llista<T> implements InLlista, Serializable {
     /**
      * Retornar true si la llista és buida
      */
+    @Override
     public boolean isEmpty() {
-          // TO-BE-DONE
+        return this.getSize() == 0;
     }
 
     /**
      * Retornar l'ArrayList que es fa servir dins de la classe
      */
+    @Override
     public ArrayList<T> getArrayList() {
         ArrayList<T> arrlist = new ArrayList<>(llista);
         return arrlist;
