@@ -10,6 +10,8 @@ public abstract class Usuari implements InUsuari {
     private String email;
     private String nom;
     private String adreca;
+    private int numPrestecsNormals;
+    private int numPrestecsLlargs;
 
     // Constructor
     public Usuari(String email_, String nom_, String adreca_) {
@@ -67,7 +69,7 @@ public abstract class Usuari implements InUsuari {
     }
 
     /**
-     * Retorna l'adreça de l'usari
+     * Retorna l'adreça de l'usuari
      *
      * @return String adreça
      */
@@ -85,11 +87,12 @@ public abstract class Usuari implements InUsuari {
     public abstract String tipusUsuari();
 
     /**
+     * Estableix el Numero de prestecs normals
      * @param numPrestecsNormals
      */
     @Override
     public void setNumPrestecsNormals(int numPrestecsNormals) {
-
+        this.numPrestecsNormals = numPrestecsNormals;
     }
 
     /**
@@ -97,7 +100,7 @@ public abstract class Usuari implements InUsuari {
      */
     @Override
     public int getNumPrestecsNormals() {
-        return 0;
+        return this.numPrestecsNormals;
     }
 
     /**
