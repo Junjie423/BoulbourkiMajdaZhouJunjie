@@ -1,5 +1,7 @@
 package prog2.model;
 
+import prog2.vista.BiblioException;
+
 import java.util.Date;
 
 /**
@@ -7,117 +9,164 @@ import java.util.Date;
  *
  * (Descripcio)
  */
-public class Prestec implements InPrestec{
+public abstract class Prestec implements InPrestec{
+    // Atributs
+    private Usuari usuari;
+    private Exemplar exemplar;
+    private Date dataCre;
+    private Date dataLim;
+    private boolean retornat;
 
+    // Constructor
+    public Prestec(Exemplar exemplar, Usuari usuari, Date dataCre) {
+        this.exemplar = exemplar;
+        this.usuari = usuari;
+        this.dataCre = dataCre;
+        this.dataLim = (dataCre);
+        this.retornat = true;
+    }
+
+    // Mètodes
     /**
+     * Estableix l'exemplar del préstec
      * @param exemplar
      */
     @Override
     public void setExemplar(Exemplar exemplar) {
-
+        this.exemplar = exemplar;
     }
 
     /**
-     * @return
+     * Retorna l'exemplar del préstec
+     *
+     * @return Exemplar
      */
     @Override
     public Exemplar getExemplar() {
-        return null;
+        return this.exemplar;
     }
 
     /**
+     * Estableix l'usuari del préstec
      * @param usuari
      */
     @Override
     public void setUsuari(Usuari usuari) {
-
+    this.usuari = usuari;
     }
 
     /**
-     * @return
+     * Retorna l'usuari del préstec
+     *
+     * @return Usuari
      */
     @Override
     public Usuari getUsuari() {
-        return null;
+        return this.usuari;
     }
 
     /**
+     * Estableix la data de creació del préstec
      * @param data
      */
     @Override
     public void setDataCreacio(Date data) {
-
+        this.dataCre = data;
     }
 
     /**
-     * @return
+     * Retorna la data de creació del préstec
+     *
+     * @return Date de creació
      */
     @Override
     public Date getDataCreacio() {
-        return null;
+        return this.dataCre;
     }
 
     /**
+     * Estableix la data de límit de retorn del préstec
      * @param data
      */
     @Override
     public void setDataLimitRetorn(Date data) {
-
+        this.dataLim = data;
     }
 
     /**
-     * @return
+     * Retorna la data de límit de retorn
+     *
+     * @return Date límit per retornar el préstec
      */
     @Override
     public Date getDataLimitRetorn() {
-        return null;
+        return this.dataLim;
     }
 
     /**
-     * @return
+     * Mètode abstracte que retorna el tipus de préstec
+     *
+     * @return "Llarg" o "Normal"
      */
     @Override
-    public String tipusPrestec() {
-        return "";
-    }
+    public abstract String tipusPrestec();
 
     /**
+     * Estableix si està o no l'exemplar retornat
      * @param retornat
      */
     @Override
     public void setRetornat(boolean retornat) {
-
+        this.retornat = retornat;
     }
 
     /**
-     * @return
+     * Retorna si l'exemplar està o no retornat
+     *
+     * @return boolean retornat
      */
     @Override
     public boolean getRetornat() {
-        return false;
+        return this.retornat;
     }
 
     /**
-     * Retornar prestec. Llança excepció si el prestec ja es vaig retornar
+     * Retornar prestec. Llança excepció si el prestec ja es va retornar
      */
     @Override
     public void retorna() {
-
+        if (this.retornat) {
+            throw new BiblioException("El préstec ja es va retornar");
+        }
+        this.retornat = true;
     }
 
     /**
      * Retornar durada prestec. La durada del prestec depen del tipus de prestec
      */
     @Override
-    public long duradaPrestec() {
-        return 0;
-    }
+    public abstract long duradaPrestec();
 
     /**
      * Retornar true si el prestec està endarrerit per a la data actual
      */
     @Override
     public boolean prestecEndarrerit() {
+        if ((!this.retornat) && this.dataLim.before(new Date())){
+            return true;
+        }
         return false;
+    }
+
+    /**
+     * Mètode sobreescrit per mostrar informació del préstec
+     *
+     * @return String amb la informació del préstec
+     */
+    @Override
+    public String toString(){
+        return ("Tipus=" + this.tipusPrestec() + ", Exemplar=" + this.exemplar.getTitol()
+                + ", Usuari=" + this.usuari.getNom() + ", Data de creació=" + this.dataCre
+                + ", Data límit retorn=" + this.dataLim + ", Retornat=" + this.retornat);
     }
 }

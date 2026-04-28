@@ -123,9 +123,8 @@ public class Exemplar implements InExemplar{
      */
     @Override
     public String toString() {
-        String info = "Id=" + this.id + ", Titol=" + this.titol
+        return ("Id=" + this.id + ", Titol=" + this.titol
                 + ", Autor=" + this.autor + "Admet Prestec Llarg="
-                +  this.admetPrestecLlarg + "Disponible=" +  this.disponible;
-        return info;
+                +  this.admetPrestecLlarg + "Disponible=" +  this.disponible);
     }
 }

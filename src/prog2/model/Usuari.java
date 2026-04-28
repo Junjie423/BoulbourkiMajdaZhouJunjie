@@ -18,6 +18,8 @@ public abstract class Usuari implements InUsuari {
         this.email = email_;
         this.nom = nom_;
         this.adreca = adreca_;
+        this.numPrestecsNormals = 0;
+        this.numPrestecsLlargs = 0;
     }
 
     // Mètodes
@@ -87,7 +89,7 @@ public abstract class Usuari implements InUsuari {
     public abstract String tipusUsuari();
 
     /**
-     * Estableix el Numero de prestecs normals
+     * Estableix el nombre de préstecs normals
      * @param numPrestecsNormals
      */
     @Override
@@ -96,7 +98,9 @@ public abstract class Usuari implements InUsuari {
     }
 
     /**
-     * @return
+     * Retorna el nombre de préstecs normals
+     *
+     * @return nombre de préstecs normals
      */
     @Override
     public int getNumPrestecsNormals() {
@@ -104,34 +108,45 @@ public abstract class Usuari implements InUsuari {
     }
 
     /**
+     * Estableix el nombre de préstecs llargs
      * @param numPrestecstLlargs
      */
     @Override
     public void setNumPrestecsLlargs(int numPrestecstLlargs) {
-
+        this.numPrestecsLlargs = numPrestecstLlargs;
     }
 
     /**
-     * @return
+     * Retorna el nombre de préstecs llargs
+     *
+     * @return nombre de préstecs llargs
      */
     @Override
     public int getNumPrestecsLlargs() {
-        return 0;
+        return this.numPrestecsLlargs;
     }
 
     /**
      * @return
      */
     @Override
-    public int getMaxPrestecsNormals() {
-        return 0;
-    }
+    public abstract int getMaxPrestecsNormals();
 
     /**
      * @return
      */
     @Override
-    public int getMaxPrestecsLlargs() {
-        return 0;
+    public abstract int getMaxPrestecsLlargs();
+
+    /**
+     * Mètode que sobreescriu toString per mostrar informació de l'usuari
+     *
+     * @return String amb la informació de l'usuari
+     */
+    @Override
+    public String toString(){
+        return ("Tipus=" + this.tipusUsuari() + ", Email=" + this.email
+                + ", Nom=" + this.nom + ", Adreca=" + this.adreca + ", Num. prestecs normals="
+                + this.numPrestecsNormals + ", Num. prestecs llargs=" + this.numPrestecsLlargs);
     }
 }
