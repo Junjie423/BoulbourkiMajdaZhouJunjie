@@ -5,63 +5,84 @@ package prog2.model;
  *
  * (Descripcio)
  */
-public class Usuari implements InUsuari {
+public abstract class Usuari implements InUsuari {
+    // Atributs
+    private String email;
+    private String nom;
+    private String adreca;
 
+    // Constructor
+    public Usuari(String email_, String nom_, String adreca_) {
+        this.email = email_;
+        this.nom = nom_;
+        this.adreca = adreca_;
+    }
+
+    // Mètodes
     /**
+     * Configura el correu de l'usuari
      * @param email
      */
     @Override
     public void setEmail(String email) {
-
+        this.email = email;
     }
 
     /**
-     * @return
+     * Retorna el correu de l'usuari
+     *
+     * @return String email
      */
     @Override
     public String getEmail() {
-        return "";
+        return this.email;
     }
 
     /**
+     * Configura el nom de l'usuari
      * @param nom
      */
     @Override
     public void setNom(String nom) {
-
+        this.nom = nom;
     }
 
     /**
-     * @return
+     * Retorna el nom de l'usuari
+     *
+     * @return String nom
      */
     @Override
     public String getNom() {
-        return "";
+        return this.nom;
     }
 
     /**
+     * Configura l'adreça de l'usuari
      * @param adreca
      */
     @Override
     public void setAdreca(String adreca) {
-
+        this.adreca = adreca;
     }
 
     /**
-     * @return
+     * Retorna l'adreça de l'usari
+     *
+     * @return String adreça
      */
     @Override
     public String getAdreca() {
-        return "";
+        return this.adreca;
     }
 
     /**
-     * @return
+     * Mètode abstracte que retorna el tipus d'usuari
+     *
+     * @return String tipus usuari (cada fill retorna el seu tipus)
      */
     @Override
-    public String tipusUsuari() {
-        return "";
-    }
+    public abstract String tipusUsuari();
 
     /**
      * @param numPrestecsNormals

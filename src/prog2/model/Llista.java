@@ -14,7 +14,7 @@ import prog2.vista.BiblioException;
  *
  * (Descripcio)
  */
-public class Llista<T> implements InLlista, Serializable {
+public abstract class Llista<T> implements InLlista, Serializable {
    protected ArrayList<T> llista;
 
    public Llista() {
@@ -32,7 +32,6 @@ public class Llista<T> implements InLlista, Serializable {
     /**
      * Afegir element a la llista. Afegeix l'element t a la llista
      */
-    @Override
     public void afegir(T t) throws BiblioException {
           // TO-BE-DONE
     }
@@ -40,7 +39,6 @@ public class Llista<T> implements InLlista, Serializable {
     /**
      * Esborrar element de la llista. Esborra l'element t a la llista
      */
-    @Override
     public void esborrar(T t) {
           // TO-BE-DONE
     }
