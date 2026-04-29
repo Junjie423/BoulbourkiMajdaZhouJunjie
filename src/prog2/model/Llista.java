@@ -16,6 +16,9 @@ import prog2.vista.BiblioException;
  */
 public abstract class Llista<T> implements InLlista, Serializable {
    protected ArrayList<T> llista;
+   private Exemplar exemplar;
+   private Usuari usuari;
+   private Prestec prestec;
 
    public Llista() {
        llista = new ArrayList<>();
