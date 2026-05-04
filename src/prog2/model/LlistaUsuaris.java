@@ -4,7 +4,7 @@ import prog2.vista.BiblioException;
 
 import java.io.Serializable;
 
-public class LlistaUsuaris extends Llista<Usuaris> implements Serializable {
+public class LlistaUsuaris extends Llista<Usuari> implements Serializable {
     // Atributs
 
     // Constructor
@@ -12,7 +12,7 @@ public class LlistaUsuaris extends Llista<Usuaris> implements Serializable {
     // Mètodes
 
     /**
-     * Afegir element a la llista. Afegeix l'element t a la llista
+     * Afegir element a la llista. Afegeix l'element u a la llista
      *
      * @param u
      */
@@ -22,7 +22,7 @@ public class LlistaUsuaris extends Llista<Usuaris> implements Serializable {
     }
 
     /**
-     * Esborrar element de la llista. Esborra l'element t a la llista
+     * Esborrar element de la llista. Esborra l'element u a la llista
      *
      * @param u
      */

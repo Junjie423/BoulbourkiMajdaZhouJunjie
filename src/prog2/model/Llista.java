@@ -23,7 +23,7 @@ public abstract class Llista<T> implements InLlista<T>, Serializable {
 
     // constructor
     public Llista() {
-        llista = new ArrayList<>();
+        llista = new ArrayList<T>();
     }
 
     // Mètodes
