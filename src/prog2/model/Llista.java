@@ -14,15 +14,19 @@ import prog2.vista.BiblioException;
  *
  * (Descripcio)
  */
-public abstract class Llista<T> implements InLlista, Serializable {
-   protected ArrayList<T> llista;
-   private Exemplar exemplar;
-   private Usuari usuari;
-   private Prestec prestec;
+public abstract class Llista<T> implements InLlista<T>, Serializable {
+    // Atributs
+    protected ArrayList<T> llista;
+    private Exemplar exemplar;
+    private Usuari usuari;
+    private Prestec prestec;
 
-   public Llista() {
-       llista = new ArrayList<>();
+    // constructor
+    public Llista() {
+        llista = new ArrayList<>();
     }
+
+    // Mètodes
 
     /**
      * Retornar nombre d'elements continguts a la llista
@@ -34,16 +38,22 @@ public abstract class Llista<T> implements InLlista, Serializable {
 
     /**
      * Afegir element a la llista. Afegeix l'element t a la llista
+     *
+     * @param t
      */
+    @Override
     public void afegir(T t) throws BiblioException {
-          // TO-BE-DONE
+        this.llista.add(t);
     }
 
     /**
      * Esborrar element de la llista. Esborra l'element t a la llista
+     *
+     * @param t
      */
+    @Override
     public void esborrar(T t) {
-          // TO-BE-DONE
+        this.llista.remove(t);
     }
 
     /**
@@ -51,7 +61,7 @@ public abstract class Llista<T> implements InLlista, Serializable {
      */
     @Override
     public T getAt(int position) {
-          // TO-BE-DONE
+          return this.llista.get(position);
     }
 
     /**
@@ -59,7 +69,7 @@ public abstract class Llista<T> implements InLlista, Serializable {
      */
     @Override
     public void clear() {
-          // TO-BE-DONE
+          this.llista.clear();
     }
 
     /**
