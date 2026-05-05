@@ -6,12 +6,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 
 public class LlistaPrestecs extends Llista<Prestec> implements Serializable {
-    // Atributs
 
-    // Constructor
-    public LlistaPrestecs(){
-        super();
-    }
     // Mètodes
 
     /**
@@ -21,8 +16,7 @@ public class LlistaPrestecs extends Llista<Prestec> implements Serializable {
      */
     @Override
     public void afegir(Prestec p) throws BiblioException {
-        Iterator<Prestec> it = llista.iterator();
-        Prestec prest = it.
+        this.llista.add(p);
     }
 
     /**
@@ -31,7 +25,7 @@ public class LlistaPrestecs extends Llista<Prestec> implements Serializable {
      * @param p
      */
     @Override
-    public void esborrar(Prestec p) {
-
+    public void esborrar(Prestec p) throws BiblioException{
+        this.llista.remove(p);
     }
 }

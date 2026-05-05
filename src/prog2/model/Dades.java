@@ -3,6 +3,7 @@ package prog2.model;
 import prog2.vista.BiblioException;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Autor: Junjie Zhou, Majda Boulbourki
@@ -11,8 +12,16 @@ import java.util.ArrayList;
  */
 public class Dades implements InDades{
     // Atributs
+    private LlistaExemplars exemplars;
+    private LlistaUsuaris usuaris;
+    private LlistaPrestecs prestecs;
 
     // Constructor
+    public Dades(){
+        this.exemplars = new LlistaExemplars();
+        this.usuaris = new LlistaUsuaris();
+        this.prestecs = new LlistaPrestecs();
+    }
 
     // Mètodes
     /**
@@ -25,7 +34,7 @@ public class Dades implements InDades{
      */
     @Override
     public void afegirExemplar(String id, String titol, String autor, boolean admetPrestecLlarg) throws BiblioException {
-
+        exemplars.afegir(new Exemplar(id, titol, autor, admetPrestecLlarg));
     }
 
     /**
@@ -33,7 +42,7 @@ public class Dades implements InDades{
      */
     @Override
     public ArrayList<Exemplar> recuperaExemplars() {
-        return null;
+        return this.exemplars.getArrayList();
     }
 
     /**

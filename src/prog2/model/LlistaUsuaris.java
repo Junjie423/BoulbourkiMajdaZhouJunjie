@@ -6,9 +6,7 @@ import java.io.Serializable;
 
 public class LlistaUsuaris extends Llista<Usuari> implements Serializable {
     // Atributs
-
     // Constructor
-
     // Mètodes
 
     /**

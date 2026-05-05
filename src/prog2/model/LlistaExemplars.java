@@ -8,12 +8,7 @@ import java.util.Iterator;
 
 public class LlistaExemplars extends Llista<Exemplar> implements Serializable {
     // Atributs
-
     // Constructor
-    public LlistaExemplars(){
-        super();        // llista = new ArrayList<Exemplar>();
-
-    }
     // Mètodes
 
     /**
@@ -31,7 +26,7 @@ public class LlistaExemplars extends Llista<Exemplar> implements Serializable {
                 throw new BiblioException("Identificador de l'exemplar ja existeix");
             }
         }
-        super.afegir(e);
+        this.llista.add(e);
     }
 
     /**
@@ -46,7 +41,7 @@ public class LlistaExemplars extends Llista<Exemplar> implements Serializable {
         while(it.hasNext()){
             Exemplar ex_aux = it.next();
             if (ex_aux.getId().equals(e.getId())){
-                super.esborrar(e);
+                this.llista.remove(e);
                 exe = ex_aux;
             }
         }
