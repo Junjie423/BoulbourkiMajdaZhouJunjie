@@ -3,12 +3,17 @@ package prog2.model;
 import prog2.vista.BiblioException;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class LlistaExemplars extends Llista<Exemplar> implements Serializable {
     // Atributs
 
     // Constructor
+    public LlistaExemplars(){
+        super();        // llista = new ArrayList<Exemplar>();
 
+    }
     // Mètodes
 
     /**
@@ -18,7 +23,15 @@ public class LlistaExemplars extends Llista<Exemplar> implements Serializable {
      */
     @Override
     public void afegir(Exemplar e) throws BiblioException {
-
+        Iterator<Exemplar> it = llista.iterator();
+        Exemplar exe;
+        while (it.hasNext()) {
+            exe = it.next();
+            if (exe.getId().equals(e.getId())) {
+                throw new BiblioException("Identificador de l'exemplar ja existeix");
+            }
+        }
+        super.afegir(e);
     }
 
     /**
@@ -27,7 +40,18 @@ public class LlistaExemplars extends Llista<Exemplar> implements Serializable {
      * @param e
      */
     @Override
-    public void esborrar(Exemplar e) {
-
+    public void esborrar(Exemplar e) throws BiblioException{
+        Iterator<Exemplar> it = llista.iterator();
+        Exemplar exe = null;
+        while(it.hasNext()){
+            Exemplar ex_aux = it.next();
+            if (ex_aux.getId().equals(e.getId())){
+                super.esborrar(e);
+                exe = ex_aux;
+            }
+        }
+        if (exe == null){
+            throw new BiblioException("No s'ha trobat l'exemplar en la llista");
+        }
     }
 }

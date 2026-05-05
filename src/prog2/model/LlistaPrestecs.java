@@ -3,12 +3,15 @@ package prog2.model;
 import prog2.vista.BiblioException;
 
 import java.io.Serializable;
+import java.util.Iterator;
 
 public class LlistaPrestecs extends Llista<Prestec> implements Serializable {
     // Atributs
 
     // Constructor
-
+    public LlistaPrestecs(){
+        super();
+    }
     // Mètodes
 
     /**
@@ -18,7 +21,8 @@ public class LlistaPrestecs extends Llista<Prestec> implements Serializable {
      */
     @Override
     public void afegir(Prestec p) throws BiblioException {
-
+        Iterator<Prestec> it = llista.iterator();
+        Prestec prest = it.
     }
 
     /**

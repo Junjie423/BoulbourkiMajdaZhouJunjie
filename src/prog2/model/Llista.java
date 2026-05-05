@@ -16,10 +16,7 @@ import prog2.vista.BiblioException;
  */
 public abstract class Llista<T> implements InLlista<T>, Serializable {
     // Atributs
-    protected ArrayList<T> llista;
-    private Exemplar exemplar;
-    private Usuari usuari;
-    private Prestec prestec;
+    protected ArrayList<T> llista;      // para que se pueda usar de forma DIRECTA en sus subclases
 
     // constructor
     public Llista() {
@@ -52,7 +49,7 @@ public abstract class Llista<T> implements InLlista<T>, Serializable {
      * @param t
      */
     @Override
-    public void esborrar(T t) {
+    public void esborrar(T t) throws BiblioException{
         this.llista.remove(t);
     }
 
