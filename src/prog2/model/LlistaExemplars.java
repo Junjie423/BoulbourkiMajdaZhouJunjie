@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class LlistaExemplars extends Llista<Exemplar> implements Serializable {
-    // Atributs
-    // Constructor
     // Mètodes
 
     /**

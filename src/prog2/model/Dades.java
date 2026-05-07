@@ -34,7 +34,7 @@ public class Dades implements InDades{
      */
     @Override
     public void afegirExemplar(String id, String titol, String autor, boolean admetPrestecLlarg) throws BiblioException {
-        exemplars.afegir(new Exemplar(id, titol, autor, admetPrestecLlarg));
+        this.exemplars.afegir(new Exemplar(id, titol, autor, admetPrestecLlarg));
     }
 
     /**
@@ -55,7 +55,11 @@ public class Dades implements InDades{
      */
     @Override
     public void afegirUsuari(String email, String nom, String adreca, boolean esEstudiant) throws BiblioException {
-
+        if(esEstudiant){
+            this.usuaris.afegir(new Estudiant(email, nom, adreca));
+        } else{
+            this.usuaris.afegir(new Professor(email, nom, adreca));
+        }
     }
 
     /**
@@ -63,7 +67,7 @@ public class Dades implements InDades{
      */
     @Override
     public ArrayList<Usuari> recuperaUsuaris() {
-        return null;
+        return usuaris.getArrayList();
     }
 
     /**
@@ -81,7 +85,7 @@ public class Dades implements InDades{
     }
 
     /**
-     * Retornar préstec. Llança excepció si el prestec ja es vaig retornar.
+     * Retornar préstec. Llança excepció si el prestec ja es va retornar.
      * El préstec s'identifica amb la seva posició dins de l'ArrayList
      *
      * @param position
@@ -96,7 +100,7 @@ public class Dades implements InDades{
      */
     @Override
     public ArrayList<Prestec> recuperaPrestecs() {
-        return null;
+        return prestecs.getArrayList();
     }
 
     /**
@@ -104,6 +108,14 @@ public class Dades implements InDades{
      */
     @Override
     public ArrayList<Prestec> recuperaPrestecsNoRetornats() {
-        return null;
+        ArrayList<Prestec> prestecsNoRetornats = new ArrayList<>();
+        Iterator<Prestec> itr = prestecs.getArrayList().iterator();
+        while(itr.hasNext()){
+            Prestec p = itr.next();
+            if(!p.getRetornat()){
+                prestecsNoRetornats.add(p);
+            }
+        }
+        return prestecsNoRetornats;
     }
 }
