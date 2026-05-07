@@ -4,6 +4,7 @@ import prog2.vista.BiblioException;
 
 import javax.swing.text.html.HTMLDocument;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 /**
@@ -82,7 +83,42 @@ public class Dades implements InDades{
      */
     @Override
     public void afegirPrestec(int exemplarPos, int usuariPos, boolean esLlarg) throws BiblioException {
+        // Cas de out_of_range en les llistes
+        if((exemplarPos < 0) || (exemplarPos > exemplars.getSize())){
+            throw new BiblioException("No hi ha cap exemplar en la posició introduïda");
+        }
+        if((usuariPos < 0) || (usuariPos > usuaris.getSize())){
+            throw new BiblioException("No hi ha cap usauri a la posició introduïda");
+        }
 
+        Exemplar e = exemplars.getAt(exemplarPos);
+        Usuari u = usuaris.getAt(usuariPos);
+
+        // Cas prestec llarg a un exemplar que no admet tipus llarg
+        if(esLlarg && !e.getAdmetPrestecLlarg()){
+            throw new BiblioException("No es pot afegir un prestec llarg a aquest exemplar");
+        }
+
+        // Cas de fer un prestec d'un exemplar no diponible
+        if(!e.isDisponible()){
+            throw new BiblioException("L'exemplar no està disponible per fer prestecs");
+        }
+
+        // Cas de fer un prestec a un usuari amb prestecs endarrerits
+        if (u.getNumPrestecsLlargs() > u.getMaxPrestecsLlargs()) {
+            throw new BiblioException("Aquest usuari ja no permet fer prestecs llargs");
+        }
+        if (u.getNumPrestecsNormals() > u.getMaxPrestecsNormals()) {
+                throw new BiblioException("Aquest usuari ja no permet fer prestecs normals");
+        }
+
+        if(esLlarg){
+            prestecs.afegir(new PrestecLlarg(e, u, new Date()));
+
+        }
+        else{
+            prestecs.afegir(new PrestecNormal(e, u, new Date()));
+        }
     }
 
     /**

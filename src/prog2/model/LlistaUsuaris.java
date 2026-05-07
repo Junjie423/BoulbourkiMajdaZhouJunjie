@@ -32,11 +32,19 @@ public class LlistaUsuaris extends Llista<Usuari> implements Serializable {
      * @param u
      */
     @Override
-    public void esborrar(Usuari u) {
+    public void esborrar(Usuari u) throws BiblioException{
         Iterator<Usuari> it = llista.iterator();
         Usuari usuari;
-        while(it.hasNext()){
-
+        boolean trobat = false;
+        while(it.hasNext() && !trobat){
+            usuari = it.next();
+            if(usuari.getAdreca().equals(u.getAdreca())){
+                trobat = true;
+            }
         }
+        if(trobat == false){
+            throw new BiblioException("L'adreça de l'usuari a esborrar no s'ha trobat.");
+        }
+        llista.remove(u);
     }
 }
