@@ -2,6 +2,7 @@ package prog2.model;
 
 import prog2.vista.BiblioException;
 
+import javax.swing.text.html.HTMLDocument;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -34,7 +35,7 @@ public class Dades implements InDades{
      */
     @Override
     public void afegirExemplar(String id, String titol, String autor, boolean admetPrestecLlarg) throws BiblioException {
-        this.exemplars.afegir(new Exemplar(id, titol, autor, admetPrestecLlarg));
+        this.exemplars.afegir(new Exemplar(id, titol, autor, admetPrestecLlarg));   //ja llença una exepció si l'id existeix al mètode afegir
     }
 
     /**
@@ -92,7 +93,12 @@ public class Dades implements InDades{
      */
     @Override
     public void retornarPrestec(int position) throws BiblioException {
-
+        Prestec p = prestecs.getAt(position);
+        if (p.getRetornat()){
+            throw new BiblioException("El prestec ja s'havia retornat");
+        } else{
+            p.setRetornat(true);
+        }
     }
 
     /**
