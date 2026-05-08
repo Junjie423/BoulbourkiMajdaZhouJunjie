@@ -104,13 +104,21 @@ public class Dades implements InDades{
             throw new BiblioException("L'exemplar no està disponible per fer prestecs");
         }
 
-        // Cas de fer un prestec a un usuari amb prestecs endarrerits
-        if (u.getNumPrestecsLlargs() > u.getMaxPrestecsLlargs()) {
-            throw new BiblioException("Aquest usuari ja no permet fer prestecs llargs");
-        }
-        if (u.getNumPrestecsNormals() > u.getMaxPrestecsNormals()) {
+        // Cas de fer un prestec a un usuari que excedeix el seu límit de prestecs normals o prestecs llargs
+        if(esLlarg){
+            if (u.getNumPrestecsLlargs() >= u.getMaxPrestecsLlargs()) {
+                throw new BiblioException("Aquest usuari ja no permet fer prestecs llargs");
+            }
+        } else{
+            if (u.getNumPrestecsNormals() >= u.getMaxPrestecsNormals()) {
                 throw new BiblioException("Aquest usuari ja no permet fer prestecs normals");
+            }
         }
+        // Cas de fer un prestec a un usuari amb prestecs endarrerits
+        if(hasEndarrertits(u)){
+            throw new BiblioException("L'usuari té prestecs endarrerits");
+        }
+
 
         if(esLlarg){
             prestecs.afegir(new PrestecLlarg(e, u, new Date()));
@@ -119,6 +127,23 @@ public class Dades implements InDades{
         else{
             prestecs.afegir(new PrestecNormal(e, u, new Date()));
         }
+    }
+
+    /**
+     * Retorna true si l'usuari introduït com a parametre té algun prestec endarrerit
+     *
+     * @param u
+     * @return si te prestecs endarrerits
+     */
+    private boolean hasEndarrertits(Usuari u){
+        Iterator<Prestec> itr = prestecs.getArrayList().iterator();
+        while(itr.hasNext()){
+            Prestec p = itr.next();
+            if (p.getUsuari().getNom().equals(u.getNom()) && p.prestecEndarrerit()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -139,6 +164,8 @@ public class Dades implements InDades{
 
     /**
      * Recuperar préstecs. Retorna un ArrayList amb tots els préstecs
+     *
+     * @return ArrayList<Prestec> llista de prestecs
      */
     @Override
     public ArrayList<Prestec> recuperaPrestecs() {
@@ -147,6 +174,8 @@ public class Dades implements InDades{
 
     /**
      * Recuperar préstecs. Retorna un ArrayList amb els préstecs no retornats
+     *
+     * @return ArrayList<Prestec> llista de prestecs no retornats
      */
     @Override
     public ArrayList<Prestec> recuperaPrestecsNoRetornats() {
