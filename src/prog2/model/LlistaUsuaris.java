@@ -20,7 +20,7 @@ public class LlistaUsuaris extends Llista<Usuari> implements Serializable {
         while(it.hasNext()){
             usuari = it.next();
             if(usuari.getAdreca().equals(u.getAdreca())){
-                throw new BiblioException("L'adreça de l'usuari a afegir ja existeix.");
+                throw new BiblioException("L'usuari amb adreça " + u.getAdreca() + " ja existeix.");
             }
         }
         llista.add(u);
