@@ -1,6 +1,14 @@
 package prog2.model;
 
-public class Estudiant extends Usuari{
+import java.io.Serializable;
+
+/**
+ * Autor: Junjie Zhou, Majda Boulbourki
+ *
+ * La classe Estudiant és una subclasse d'Usuari (tipus d'usuari)
+ * que permet fer 2 reserves normals i 1 reserva llarga.
+ */
+public class Estudiant extends Usuari {
     // Atributs
 
     // Constructor

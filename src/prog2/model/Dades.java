@@ -3,6 +3,7 @@ package prog2.model;
 import prog2.vista.BiblioException;
 
 import javax.swing.text.html.HTMLDocument;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -10,9 +11,10 @@ import java.util.Iterator;
 /**
  * Autor: Junjie Zhou, Majda Boulbourki
  *
- * (Descripcio)
+ * La classe dades conté les llistes amb els usuaris, exemplars i prestecs
+ * Permet afegir objectes a les diferents llistes i retornar les llistes
  */
-public class Dades implements InDades{
+public class Dades implements InDades, Serializable {
     // Atributs
     private LlistaExemplars exemplars;
     private LlistaUsuaris usuaris;
@@ -69,7 +71,7 @@ public class Dades implements InDades{
     /**
      * Recuperar usuaris. Retorna un ArrayList amb tots els usuaris
      *
-     * @return ArrayList<Exemplar> llista d'exemplars
+     * @return ArrayList<Usuari> llista d'usuaris
      */
     @Override
     public ArrayList<Usuari> recuperaUsuaris() {
@@ -123,12 +125,16 @@ public class Dades implements InDades{
             throw new BiblioException("L'usuari té prestecs endarrerits");
         }
 
-
+        // Si tot està correcte ja es pot afegir el prestec
         if(esLlarg){
             prestecs.afegir(new PrestecLlarg(e, u, new Date()));
+            u.setNumPrestecsLlargs(u.getNumPrestecsLlargs() + 1);
+            e.setDisponible(false);
         }
         else{
             prestecs.afegir(new PrestecNormal(e, u, new Date()));
+            u.setNumPrestecsNormals(u.getNumPrestecsNormals() + 1);
+            e.setDisponible(false);
         }
     }
 
@@ -161,7 +167,8 @@ public class Dades implements InDades{
         if (p.getRetornat()){
             throw new BiblioException("El prestec ja s'havia retornat");
         } else{
-            p.setRetornat(true);
+            p.retorna();
+            System.out.println("Prestec retornat correctament");
         }
     }
 

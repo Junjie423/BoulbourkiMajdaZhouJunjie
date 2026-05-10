@@ -1,8 +1,12 @@
 package prog2.model;
 
+/**
+ * Autor: Junjie Zhou, Majda Boulbourki
+ *
+ * La classe Estudiant és una subclasse d'Usuari (tipus d'usuari)
+ * que permet fer 2 reserves normals i 2 reserves llargues.
+ */
 public class Professor extends Usuari {
-    // Atributs
-
     // Constructor
     public Professor(String email, String nom, String adreca){
         super(email, nom, adreca);

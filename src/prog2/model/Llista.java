@@ -12,7 +12,8 @@ import prog2.vista.BiblioException;
 /**
  * Autor: Junjie Zhou, Majda Boulbourki
  *
- * (Descripcio)
+ * La classe Llista és una classe abstracta que fa de plantilla a les seves subclasses
+ * que poden guardar Objectes de tipus T.
  */
 public abstract class Llista<T> implements InLlista<T>, Serializable {
     // Atributs
@@ -79,6 +80,8 @@ public abstract class Llista<T> implements InLlista<T>, Serializable {
 
     /**
      * Retornar l'ArrayList que es fa servir dins de la classe
+     *
+     * @return ArrayList<T> llista que té dins de l'objecte
      */
     @Override
     public ArrayList<T> getArrayList() {
@@ -86,4 +89,12 @@ public abstract class Llista<T> implements InLlista<T>, Serializable {
         return arrlist;
     }
 
+    /**
+     * Retorna si en la llista conté algun Objecte concret
+     * @param t
+     * @return conté
+     */
+    public boolean contains(T t) {
+        return llista.contains(t);
+    }
 }

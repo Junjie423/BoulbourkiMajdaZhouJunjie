@@ -2,9 +2,14 @@ package prog2.model;
 
 import java.util.Date;
 
+/**
+ * Autor: Junjie Zhou, Majda Boulbourki
+ *
+ * Subclasse de prestec de tipus llarg.
+ * Pot ser prestat per 140 segons (14 dies)
+ *
+ */
 public class PrestecLlarg extends Prestec {
-    // Atributs
-
     // Constructor
     public PrestecLlarg(Exemplar exemplar, Usuari usuari, Date dataCre) {
         super(exemplar, usuari, dataCre);

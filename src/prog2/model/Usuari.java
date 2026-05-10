@@ -1,11 +1,15 @@
 package prog2.model;
 
+import java.io.Serializable;
+
 /**
  * Autor: Junjie Zhou, Majda Boulbourki
  *
- * (Descripcio)
+ * La classe Usuari és una classe abstracta que guarda el nom,
+ * el correu, l'adreça i el nombre d'exemplars que té reservat de cada tipus.
+ * Aquesta classe pot tenir dos tipus d'usuari, estudiants i professors.
  */
-public abstract class Usuari implements InUsuari {
+public abstract class Usuari implements InUsuari, Serializable {
     // Atributs
     private String email;
     private String nom;
@@ -148,5 +152,18 @@ public abstract class Usuari implements InUsuari {
         return ("Tipus=" + this.tipusUsuari() + ", Email=" + this.email
                 + ", Nom=" + this.nom + ", Adreca=" + this.adreca + ", Num. prestecs normals="
                 + this.numPrestecsNormals + ", Num. prestecs llargs=" + this.numPrestecsLlargs);
+    }
+
+    /**
+     * Compara objectes de tipus Usuari amb el seu correu
+     * @param o   the reference object with which to compare.
+     * @return iguals
+     */
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof Usuari) {
+            return ((Usuari) o).getEmail().equals(this.email);
+        }
+        return false;
     }
 }

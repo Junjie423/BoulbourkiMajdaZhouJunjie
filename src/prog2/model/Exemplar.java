@@ -1,11 +1,14 @@
 package prog2.model;
 
+import java.io.Serializable;
+
 /**
  * Autor: Junjie Zhou, Majda Boulbourki
  *
- * (Descripcio)
+ * La classe Exemplar guarda les dades d'un article
+ * que pot estar disponible o no (reservat).
  */
-public class Exemplar implements InExemplar{
+public class Exemplar implements InExemplar, Serializable {
     // Atributs
     private String id;
     private String titol;
@@ -124,7 +127,20 @@ public class Exemplar implements InExemplar{
     @Override
     public String toString() {
         return ("Id=" + this.id + ", Titol=" + this.titol
-                + ", Autor=" + this.autor + "Admet Prestec Llarg="
-                +  this.admetPrestecLlarg + "Disponible=" +  this.disponible);
+                + ", Autor=" + this.autor + " Admet Prestec Llarg="
+                +  this.admetPrestecLlarg + " Disponible=" +  this.disponible);
+    }
+
+    /**
+     * Compara objectes de tipus Exemplar amb el seu id
+     * @param o   the reference object with which to compare.
+     * @return iguals
+     */
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof Exemplar) {
+            return ((Exemplar) o).getId().equals(this.id);
+        }
+        return false;
     }
 }

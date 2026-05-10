@@ -2,14 +2,17 @@ package prog2.model;
 
 import prog2.vista.BiblioException;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Autor: Junjie Zhou, Majda Boulbourki
  *
- * (Descripcio)
+ * La classe Prestec és una classe abstracta que guarda un tipus de prestec
+ * que pot ser llarg o normal. Els objectes de tipus prestec tenen guardat un objecte
+ * exemplar i un objecte usuari.
  */
-public abstract class Prestec implements InPrestec{
+public abstract class Prestec implements InPrestec, Serializable {
     // Atributs
     private Usuari usuari;
     private Exemplar exemplar;
@@ -22,8 +25,8 @@ public abstract class Prestec implements InPrestec{
         this.exemplar = exemplar;
         this.usuari = usuari;
         this.dataCre = dataCre;
-        this.dataLim = (dataCre);
-        this.retornat = true;
+        this.dataLim = new Date(dataCre.getTime()+duradaPrestec());
+        this.retornat = false;
     }
 
     // Mètodes
@@ -138,7 +141,12 @@ public abstract class Prestec implements InPrestec{
         if (this.retornat) {
             throw new BiblioException("El préstec ja es va retornar");
         }
+        if(tipusPrestec().equals("Llarg"))
+            usuari.setNumPrestecsLlargs(usuari.getNumPrestecsLlargs()-1);
+        else
+            usuari.setNumPrestecsNormals(usuari.getNumPrestecsNormals()-1);
         this.retornat = true;
+        exemplar.setDisponible(true);
     }
 
     /**
