@@ -21,7 +21,7 @@ public class LlistaExemplars extends Llista<Exemplar> implements Serializable {
         while (it.hasNext()) {
             exe = it.next();
             if (exe.getId().equals(e.getId())) {
-                throw new BiblioException("Identificador de l'exemplar ja existeix");
+                throw new BiblioException("L'exemplar amb Id: " +e.getId() +" ja existeix");
             }
         }
         this.llista.add(e);
