@@ -41,6 +41,8 @@ public class Dades implements InDades{
 
     /**
      * Recuperar préstecs. Retorna un ArrayList amb tots els exemplars
+     *
+     * @return ArrayList<Exemplar> llista d'exemplars
      */
     @Override
     public ArrayList<Exemplar> recuperaExemplars() {
@@ -66,6 +68,8 @@ public class Dades implements InDades{
 
     /**
      * Recuperar usuaris. Retorna un ArrayList amb tots els usuaris
+     *
+     * @return ArrayList<Exemplar> llista d'exemplars
      */
     @Override
     public ArrayList<Usuari> recuperaUsuaris() {
@@ -122,7 +126,6 @@ public class Dades implements InDades{
 
         if(esLlarg){
             prestecs.afegir(new PrestecLlarg(e, u, new Date()));
-
         }
         else{
             prestecs.afegir(new PrestecNormal(e, u, new Date()));
