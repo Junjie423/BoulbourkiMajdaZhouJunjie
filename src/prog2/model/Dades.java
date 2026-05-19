@@ -168,7 +168,6 @@ public class Dades implements InDades, Serializable {
             throw new BiblioException("El prestec ja s'havia retornat");
         } else{
             p.retorna();
-            System.out.println("Prestec retornat correctament");
         }
     }
 
