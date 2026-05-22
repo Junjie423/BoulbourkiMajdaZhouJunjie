@@ -7,19 +7,23 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class FrmGestioExemplars extends JFrame {
+public class FrmGestioExemplars extends JDialog {
     private JPanel panelGestioExemplars;
     private JButton btnAfegir;
     private JButton btnMostrar;
     private JButton btnSortir;
     private Adaptador adaptador;
 
-    public FrmGestioExemplars(Adaptador adp){
+    Window w = this;
+    public FrmGestioExemplars(Adaptador adp, Window pare){
+        super(pare, Dialog.ModalityType.APPLICATION_MODAL); // Bloquejar l'anterior (la pestanya pare)
         add(panelGestioExemplars);
         adaptador = adp;
         setTitle("Gestio Exemplars");
         setMinimumSize(new Dimension(500,500));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
+
 
         btnAfegir.addActionListener(new ActionListener() {
             /**
@@ -29,7 +33,7 @@ public class FrmGestioExemplars extends JFrame {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmAfegirExemplar frmAfegirExemplar = new FrmAfegirExemplar();
+                FrmAfegirExemplar frmAfegirExemplar = new FrmAfegirExemplar(adaptador);
             }
         });
 
