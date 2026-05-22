@@ -46,7 +46,7 @@
         </constraints>
         <properties>
           <hideActionText value="false"/>
-          <text value="Gestió Exemplars 2"/>
+          <text value="Gestió Exemplars"/>
         </properties>
       </component>
     </children>

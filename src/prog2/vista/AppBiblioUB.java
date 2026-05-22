@@ -1,5 +1,7 @@
 package prog2.vista;
 
+import prog2.adaptador.Adaptador;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,13 +15,18 @@ public class AppBiblioUB extends JFrame {
     private JButton btnGuardar;
     private JButton btnCarregar;
 
+    private Adaptador adaptador;
+
     public AppBiblioUB() {
+        adaptador = new Adaptador();
+        try {for(int i = 0; i< 10; i++){adaptador.afegirExemplar("Id"+i,"Tit"+i,"Aut"+i,i%2 == 0);adaptador.afegirUsuari("Mail"+i,"Nom"+i,"Adr"+i,i%2 ==0);}adaptador.afegirPrestec(1,1,false);} catch (Exception e){System.err.println("Error inesperat:" + e.getMessage());}
         add(panelPrincipal);
         setTitle("Biblio");
         setSize(300, 200);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+        Window w = this;
         btnGestioUsuaris.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
@@ -28,7 +35,7 @@ public class AppBiblioUB extends JFrame {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmGestioUsuaris formUsuari =  new FrmGestioUsuaris();
+                FrmGestioUsuaris formUsuari =  new FrmGestioUsuaris(adaptador, w);
             }
         });
         btnGestioExemplars.addActionListener(new ActionListener() {
@@ -39,7 +46,7 @@ public class AppBiblioUB extends JFrame {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmGestioExemplars formExemplar =  new FrmGestioExemplars();
+                FrmGestioExemplars formExemplar =  new FrmGestioExemplars(adaptador);
             }
         });
         btnGestioPrestecs.addActionListener(new ActionListener() {
@@ -50,7 +57,7 @@ public class AppBiblioUB extends JFrame {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmGestioPrestecs formPrestecs =  new FrmGestioPrestecs();
+                FrmGestioPrestecs formPrestecs =  new FrmGestioPrestecs(adaptador);
             }
         });
         btnGuardar.addActionListener(new ActionListener() {

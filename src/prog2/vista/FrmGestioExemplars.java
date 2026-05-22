@@ -1,5 +1,7 @@
 package prog2.vista;
 
+import prog2.adaptador.Adaptador;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,13 +12,15 @@ public class FrmGestioExemplars extends JFrame {
     private JButton btnAfegir;
     private JButton btnMostrar;
     private JButton btnSortir;
+    private Adaptador adaptador;
 
-    public FrmGestioExemplars(){
+    public FrmGestioExemplars(Adaptador adp){
         add(panelGestioExemplars);
+        adaptador = adp;
         setTitle("Gestio Exemplars");
-        setSize(500,500);
+        setMinimumSize(new Dimension(500,500));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setVisible(true);
+
         btnAfegir.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
@@ -51,6 +55,8 @@ public class FrmGestioExemplars extends JFrame {
                 dispose();
             }
         });
+
+        setVisible(true);
     }
 
 

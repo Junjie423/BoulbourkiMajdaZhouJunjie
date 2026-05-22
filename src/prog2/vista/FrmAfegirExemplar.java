@@ -1,5 +1,7 @@
 package prog2.vista;
 
+import prog2.adaptador.Adaptador;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -10,6 +12,7 @@ public class FrmAfegirExemplar extends JDialog {
     private JButton btnCancel;
 
     public FrmAfegirExemplar() {
+        add(panelAfegir);
         setContentPane(panelAfegir);
         setModal(true);
         getRootPane().setDefaultButton(btnAcceptar);
@@ -58,11 +61,5 @@ public class FrmAfegirExemplar extends JDialog {
         dispose();
     }
 
-    public static void main(String[] args) {
-        FrmAfegirExemplar dialog = new FrmAfegirExemplar();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }
 
 }

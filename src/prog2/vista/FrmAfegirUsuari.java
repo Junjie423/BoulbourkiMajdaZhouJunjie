@@ -1,26 +1,40 @@
 package prog2.vista;
 
+import prog2.adaptador.Adaptador;
+
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 public class FrmAfegirUsuari extends JDialog {
     private JPanel contentPane;
-    private JButton buttonOK;
-    private JButton buttonCancel;
+    private JButton btnOk;
+    private JButton btnCancelar;
+    private JTextField textField1;
+    private JTextField textField2;
+    private JTextField textField3;
+    private JLabel email;
+    private JLabel nom;
+    private JLabel adreca;
+    private JCheckBox checkStudent;
 
-    public FrmAfegirUsuari() {
+    private Adaptador adaptador;
+    public FrmAfegirUsuari(Adaptador adp) {
+        adaptador = adp;
         setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
+        setSize(500, 500);
+        setTitle("Afegir Usuari");
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        getRootPane().setDefaultButton(btnOk);
+        setLocationRelativeTo(null);
 
-        buttonOK.addActionListener(new ActionListener() {
+        btnOk.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
 
-        buttonCancel.addActionListener(new ActionListener() {
+        btnCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
@@ -43,20 +57,20 @@ public class FrmAfegirUsuari extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
+        try {
+            if (textField1.getText().equals("") || textField2.getText().equals("") || textField3.getText().equals("")) {
+                throw new RuntimeException("Camps buits");
+            }
+            adaptador.afegirUsuari(textField1.getText(), textField2.getText(), textField3.getText(), checkStudent.isSelected());
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Afegir Usuari", JOptionPane.ERROR_MESSAGE);
+        }
         dispose();
     }
 
     private void onCancel() {
         // add your code here if necessary
         dispose();
-    }
-
-    public static void main(String[] args) {
-        FrmAfegirUsuari dialog = new FrmAfegirUsuari();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
     }
 
 }
