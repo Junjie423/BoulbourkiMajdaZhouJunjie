@@ -9,9 +9,9 @@ public class FrmAfegirUsuari extends JDialog {
     private JPanel contentPane;
     private JButton btnOk;
     private JButton btnCancelar;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
+    private JTextField tNom;
+    private JTextField tEmail;
+    private JTextField tAdreca;
     private JLabel email;
     private JLabel nom;
     private JLabel adreca;
@@ -23,10 +23,21 @@ public class FrmAfegirUsuari extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         setSize(500, 500);
+        btnOk.setEnabled(false);
         setTitle("Afegir Usuari");
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         getRootPane().setDefaultButton(btnOk);
         setLocationRelativeTo(null);
+
+        KeyListener checkBuits = new KeyAdapter() {
+            public void keyReleased(KeyEvent e) {
+                btnOk.setEnabled((!tNom.getText().isEmpty() && !tEmail.getText().isEmpty() && !tAdreca.getText().isEmpty()));
+            }
+        };
+
+        tNom.addKeyListener(checkBuits);
+        tEmail.addKeyListener(checkBuits);
+        tAdreca.addKeyListener(checkBuits);
 
         btnOk.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -48,6 +59,10 @@ public class FrmAfegirUsuari extends JDialog {
             }
         });
 
+        // Escoltador pels JTextField per tal que quan estiguin omplerts habiliti el botó acceptar
+
+
+
         // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -58,10 +73,10 @@ public class FrmAfegirUsuari extends JDialog {
 
     private void onOK() {
         try {
-            if (textField1.getText().equals("") || textField2.getText().equals("") || textField3.getText().equals("")) {
-                throw new RuntimeException("Camps buits");
+            if (tNom.getText().isBlank() || tEmail.getText().isBlank() || tAdreca.getText().isBlank()) {
+                throw new BiblioException("Hi ha camps per omplir encara");
             }
-            adaptador.afegirUsuari(textField1.getText(), textField2.getText(), textField3.getText(), checkStudent.isSelected());
+            adaptador.afegirUsuari(tEmail.getText(), tNom.getText(), tAdreca.getText(), checkStudent.isSelected());
         }catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Afegir Usuari", JOptionPane.ERROR_MESSAGE);
         }
@@ -69,7 +84,6 @@ public class FrmAfegirUsuari extends JDialog {
     }
 
     private void onCancel() {
-        // add your code here if necessary
         dispose();
     }
 

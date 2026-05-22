@@ -46,7 +46,7 @@ public class AppBiblioUB extends JFrame {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmGestioExemplars formExemplar =  new FrmGestioExemplars(adaptador);
+                FrmGestioExemplars formExemplar =  new FrmGestioExemplars(adaptador, w);
             }
         });
         btnGestioPrestecs.addActionListener(new ActionListener() {
@@ -57,7 +57,7 @@ public class AppBiblioUB extends JFrame {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrmGestioPrestecs formPrestecs =  new FrmGestioPrestecs(adaptador);
+                FrmGestioPrestecs formPrestecs =  new FrmGestioPrestecs(adaptador, w);
             }
         });
         btnGuardar.addActionListener(new ActionListener() {
