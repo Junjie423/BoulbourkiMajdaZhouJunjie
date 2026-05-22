@@ -19,6 +19,7 @@ public class FrmGestioUsuaris extends JDialog {
     private JList llistaUsuaris;
     private Adaptador adaptdor;
 
+    Window w = this;
     public FrmGestioUsuaris(Adaptador adp, Window pare){
         super(pare, Dialog.ModalityType.APPLICATION_MODAL);
         add(panelGestioUsuaris);
