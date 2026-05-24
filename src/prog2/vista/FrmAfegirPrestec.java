@@ -122,7 +122,7 @@ public class FrmAfegirPrestec extends JDialog {
     }
 
     /**
-     * Mètode que a partir dels índexs seleccionats dels JComboBox i el JCheckBox, crida el mètode afegirPrestec de l'adaptador.
+     * Mètode que a partir dels índexs seleccionats dels JComboBox i si JCheckBox està pres, crida el mètode afegirPrestec de l'adaptador.
      */
     private void onOK() {
         try{
