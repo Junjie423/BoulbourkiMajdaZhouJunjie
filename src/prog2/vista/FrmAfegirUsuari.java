@@ -3,6 +3,7 @@ package prog2.vista;
 import prog2.adaptador.Adaptador;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class FrmAfegirUsuari extends JDialog {
@@ -18,7 +19,8 @@ public class FrmAfegirUsuari extends JDialog {
     private JCheckBox checkStudent;
 
     private Adaptador adaptador;
-    public FrmAfegirUsuari(Adaptador adp) {
+    public FrmAfegirUsuari(Adaptador adp, Window pare) {
+        super(pare, ModalityType.APPLICATION_MODAL);
         adaptador = adp;
         setContentPane(contentPane);
         setModal(true);
@@ -77,10 +79,10 @@ public class FrmAfegirUsuari extends JDialog {
                 throw new BiblioException("Hi ha camps per omplir encara");
             }
             adaptador.afegirUsuari(tEmail.getText(), tNom.getText(), tAdreca.getText(), checkStudent.isSelected());
+            dispose();
         }catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Afegir Usuari", JOptionPane.ERROR_MESSAGE);
         }
-        dispose();
     }
 
     private void onCancel() {

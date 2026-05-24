@@ -3,6 +3,7 @@ package prog2.vista;
 import prog2.adaptador.Adaptador;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class FrmAfegirExemplar extends JDialog {
@@ -18,13 +19,14 @@ public class FrmAfegirExemplar extends JDialog {
     private JLabel lAutor;
 
     private Adaptador adaptador;
-    public FrmAfegirExemplar(Adaptador adp) {
+    public FrmAfegirExemplar(Adaptador adp, Window pare) {
+        super(pare, ModalityType.APPLICATION_MODAL);
         adaptador = adp;
         setContentPane(panelAfegir);
         setModal(true);
         setSize(500, 500);
         setTitle("Afegir Exemplar");
-        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         getRootPane().setDefaultButton(btnOk);
         setLocationRelativeTo(null);
         btnOk.setEnabled(false);
@@ -74,15 +76,14 @@ public class FrmAfegirExemplar extends JDialog {
             if (tID.getText().isBlank() || tTitol.getText().isBlank() || tAutor.getText().isBlank()) {
                 throw new BiblioException("Hi ha camps per omplir encara");
             }
-            adaptador.afegirUsuari(tID.getText(), tTitol.getText(), tAutor.getText(), pLlarg.isSelected());
+            adaptador.afegirExemplar(tID.getText(), tTitol.getText(), tAutor.getText(), pLlarg.isSelected());
+            dispose();
         }catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Afegir Exemplar", JOptionPane.ERROR_MESSAGE);
         }
-        dispose();
     }
 
     private void onCancel() {
-        // add your code here if necessary
         dispose();
     }
 

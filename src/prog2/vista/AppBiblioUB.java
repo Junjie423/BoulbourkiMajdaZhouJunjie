@@ -14,19 +14,19 @@ public class AppBiblioUB extends JFrame {
     private JButton btnGestioPrestecs;
     private JButton btnGuardar;
     private JButton btnCarregar;
+    private JButton btnSortir;
 
     private Adaptador adaptador;
-
+    private Window w = this;
     public AppBiblioUB() {
         adaptador = new Adaptador();
-        try {for(int i = 0; i< 10; i++){adaptador.afegirExemplar("Id"+i,"Tit"+i,"Aut"+i,i%2 == 0);adaptador.afegirUsuari("Mail"+i,"Nom"+i,"Adr"+i,i%2 ==0);}adaptador.afegirPrestec(1,1,false);} catch (Exception e){System.err.println("Error inesperat:" + e.getMessage());}
+        //try {for(int i = 0; i< 10; i++){adaptador.afegirExemplar("Id"+i,"Tit"+i,"Aut"+i,i%2 == 0);adaptador.afegirUsuari("Mail"+i,"Nom"+i,"Adr"+i,i%2 ==0);}adaptador.afegirPrestec(1,1,false);} catch (Exception e){System.err.println("Error inesperat:" + e.getMessage());}
         add(panelPrincipal);
         setTitle("Biblio");
-        setSize(300, 200);
+        setSize(550, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        Window w = this;
         btnGestioUsuaris.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
@@ -69,7 +69,15 @@ public class AppBiblioUB extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser chooser = new JFileChooser();
-                chooser.showOpenDialog(btnGuardar);
+                int resposta = chooser.showSaveDialog(w); // Donara 0 si funciona, 1 si no funciona i -1 si hi ha error
+                if (resposta == JFileChooser.APPROVE_OPTION) { // Cas 0
+                    try {
+                        adaptador.guardaDades(chooser.getSelectedFile().getAbsolutePath());
+                        JOptionPane.showMessageDialog(btnGuardar, "Dades guardades correctament", "Guardar Dades", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (BiblioException ex) {
+                        JOptionPane.showMessageDialog(btnGuardar, ex.getMessage(), "Guardar dades", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
             }
         });
         btnCarregar.addActionListener(new ActionListener() {
@@ -80,7 +88,22 @@ public class AppBiblioUB extends JFrame {
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                JFileChooser chooser = new JFileChooser();
+                int resposta = chooser.showOpenDialog(w);
+                if (resposta == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        adaptador.carregaDades(chooser.getSelectedFile().getAbsolutePath());
+                        JOptionPane.showMessageDialog(btnCarregar,"Dades carregades correctament", "Carregar Dades", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (BiblioException ex) {
+                        JOptionPane.showMessageDialog(btnCarregar, ex.getMessage(), "Carregar dades", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
+        btnSortir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
             }
         });
     }
