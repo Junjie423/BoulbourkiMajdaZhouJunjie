@@ -7,6 +7,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Autors: Junjie Zhou, Majda Boulbourki
+ *
+ *
+ */
 public class FrmGestioPrestecs extends JDialog {
 
     private JButton btnMostrar;
@@ -17,6 +22,7 @@ public class FrmGestioPrestecs extends JDialog {
     private JList llistaPrestecs;
     private JScrollPane panelLlista;
     private JButton btnTornar;
+    private JPanel panelMostrar;
     private Adaptador adaptador;
 
     private Window w = this;
@@ -29,7 +35,8 @@ public class FrmGestioPrestecs extends JDialog {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(500,500);
         setLocationRelativeTo(null);
-        panelLlista.setVisible(false);
+        panelMostrar.setVisible(false);
+        decorar();
         btnMostrar.addActionListener(new ActionListener() {
 
             @Override
@@ -37,10 +44,10 @@ public class FrmGestioPrestecs extends JDialog {
                 //Si s'ha pres el checkbox:
                 actualizaLlista();
                 if (btnMostrar.getText().equals("Visualitzar préstecs")) {
-                    panelLlista.setVisible(true);
+                    panelMostrar.setVisible(true);
                     btnMostrar.setText("Amagar préstecs");
                 } else {
-                    panelLlista.setVisible(false);
+                    panelMostrar.setVisible(false);
                     btnMostrar.setText("Visualitzar préstecs");
                 }
             }
@@ -98,5 +105,14 @@ public class FrmGestioPrestecs extends JDialog {
                 llistaPrestecs.setListData((adaptador.recuperaPrestecs().toArray()));
             }
         }
+    }
+
+    private void decorar(){
+        btnMostrar.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        btnAfegir.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        btnRetornar.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        btnTornar.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        checkMostrarNoRetornats.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        llistaPrestecs.setFixedCellHeight(25);
     }
 }

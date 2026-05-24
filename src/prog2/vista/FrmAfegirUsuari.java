@@ -3,9 +3,15 @@ package prog2.vista;
 import prog2.adaptador.Adaptador;
 
 import javax.swing.*;
+import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * Autors: Junjie Zhou, Majda Boulbourki
+ *
+ *
+ */
 public class FrmAfegirUsuari extends JDialog {
     private JPanel contentPane;
     private JButton btnOk;
@@ -24,12 +30,13 @@ public class FrmAfegirUsuari extends JDialog {
         adaptador = adp;
         setContentPane(contentPane);
         setModal(true);
-        setSize(500, 500);
+        setSize(500, 300);
         btnOk.setEnabled(false);
         setTitle("Afegir Usuari");
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         getRootPane().setDefaultButton(btnOk);
         setLocationRelativeTo(null);
+        decorar();
 
         KeyListener checkBuits = new KeyAdapter() {
             public void keyReleased(KeyEvent e) {
@@ -78,9 +85,12 @@ public class FrmAfegirUsuari extends JDialog {
             if (tNom.getText().isBlank() || tEmail.getText().isBlank() || tAdreca.getText().isBlank()) {
                 throw new BiblioException("Hi ha camps per omplir encara");
             }
+            if(!tEmail.getText().contains("@")){
+                throw new BiblioException("El format del correu està incorrecte (cal @)");
+            }
             adaptador.afegirUsuari(tEmail.getText(), tNom.getText(), tAdreca.getText(), checkStudent.isSelected());
             dispose();
-        }catch (Exception e) {
+        }catch (BiblioException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Afegir Usuari", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -89,4 +99,18 @@ public class FrmAfegirUsuari extends JDialog {
         dispose();
     }
 
+    private void decorar(){
+        btnOk.setFont(new Font("Times New Roman", Font.BOLD, 16));
+        btnCancelar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+        nom.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        email.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        adreca.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        checkStudent.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        tNom.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        tEmail.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        tAdreca.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        tNom.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(5,5,5,5), new MatteBorder(0, 0, 2, 0, Color.LIGHT_GRAY)));
+        tEmail.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(5,5,5,5), new MatteBorder(0, 0, 2, 0, Color.LIGHT_GRAY)));
+        tAdreca.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(5,5,5,5), new MatteBorder(0, 0, 2, 0, Color.LIGHT_GRAY)));
+    }
 }

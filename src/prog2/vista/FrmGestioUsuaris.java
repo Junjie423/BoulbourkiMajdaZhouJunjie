@@ -9,6 +9,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Autors: Junjie Zhou, Majda Boulbourki
+ *
+ *
+ */
 public class FrmGestioUsuaris extends JDialog {
     private JButton btnvisualitzarUsuaris;
     private JPanel panelGestioUsuaris;
@@ -28,6 +33,7 @@ public class FrmGestioUsuaris extends JDialog {
         setSize(500,500);
         setLocationRelativeTo(null);
         panelLlista.setVisible(false);
+        decorar();
         btnafegirUsuaris.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -65,5 +71,12 @@ public class FrmGestioUsuaris extends JDialog {
         }else{
             llistaUsuaris.setListData(adaptdor.recuperaUsuaris().toArray());
         }
+    }
+
+    private void decorar() {
+        btnvisualitzarUsuaris.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        btnafegirUsuaris.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        btnRetorn.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        llistaUsuaris.setFixedCellHeight(25);
     }
 }

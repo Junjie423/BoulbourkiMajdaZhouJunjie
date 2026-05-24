@@ -1,20 +1,24 @@
 package prog2.vista;
 
 import prog2.adaptador.Adaptador;
-import prog2.model.Exemplar;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * Autors: Junjie Zhou, Majda Boulbourki
+ *
+ *
+ */
 public class FrmAfegirPrestec extends JDialog {
     private JPanel contentPane;
     private JButton btnOK;
     private JButton btnCancelar;
     private JLabel LUsuaris;
     private JLabel LExemplars;
-    private JComboBox lUsuaris;
-    private JComboBox lExemplars;
+    private JComboBox cUsuaris;
+    private JComboBox cExemplars;
     private JCheckBox checkPrestecLlarg;
     private Adaptador adaptador;
 
@@ -25,30 +29,29 @@ public class FrmAfegirPrestec extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(btnOK);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setSize(500, 500);
         btnOK.setEnabled(false);
-        lUsuaris.addItem("");
-        lExemplars.addItem("");
+        cUsuaris.addItem("");
+        cExemplars.addItem("");
         for (Object u: adaptador.recuperaUsuaris()){
-            lUsuaris.addItem(u);
+            cUsuaris.addItem(u);
         }
         for (Object u: adaptador.recuperaExemplars()){
-            lExemplars.addItem(u);
+            cExemplars.addItem(u);
         }
-        pack();
-        lUsuaris.addActionListener(new ActionListener() {
+        setSize(500, 300);
+        decorar();
+        cUsuaris.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(lUsuaris.getSelectedIndex() != 0 && lExemplars.getSelectedIndex()!= 0){
+                if(cUsuaris.getSelectedIndex() != 0 && cExemplars.getSelectedIndex()!= 0){
                     btnOK.setEnabled(true);
                 } else{
                     btnOK.setEnabled(false);
                 }
             }
         });
-        lExemplars.addActionListener(new ActionListener() {
+        cExemplars.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(lExemplars.getSelectedIndex()!=0 && lUsuaris.getSelectedIndex()!=0){
+                if(cExemplars.getSelectedIndex()!=0 && cUsuaris.getSelectedIndex()!=0){
                     btnOK.setEnabled(true);
                 } else{
                     btnOK.setEnabled(false);
@@ -66,6 +69,7 @@ public class FrmAfegirPrestec extends JDialog {
                 onCancel();
             }
         });
+        setLocationRelativeTo(null);
         setVisible(true);
 
         // call onCancel() when cross is clicked
@@ -86,14 +90,24 @@ public class FrmAfegirPrestec extends JDialog {
 
     private void onOK() {
         try{
-            adaptador.afegirPrestec(lExemplars.getSelectedIndex()-1,lUsuaris.getSelectedIndex()-1,checkPrestecLlarg.isSelected());
+            adaptador.afegirPrestec(cExemplars.getSelectedIndex()-1, cUsuaris.getSelectedIndex()-1,checkPrestecLlarg.isSelected());
             dispose();
-        } catch(Exception e){
+        } catch(BiblioException e){
             JOptionPane.showMessageDialog(this, e.getMessage(), "Afegir Prestec", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void onCancel() {
         dispose();
+    }
+
+    private void decorar(){
+        btnOK.setFont(new Font("Times New Roman", Font.BOLD, 16));
+        btnCancelar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+        cUsuaris.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        cExemplars.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        checkPrestecLlarg.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        LUsuaris.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+        LExemplars.setFont(new Font("Times New Roman", Font.PLAIN, 14));
     }
 }

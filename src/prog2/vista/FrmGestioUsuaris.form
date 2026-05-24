@@ -8,22 +8,6 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="45ccd" class="javax.swing.JButton" binding="btnvisualitzarUsuaris">
-        <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Visualitzar usuaris"/>
-        </properties>
-      </component>
-      <component id="5e0fe" class="javax.swing.JButton" binding="btnafegirUsuaris">
-        <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Afegir usuaris"/>
-        </properties>
-      </component>
       <scrollpane id="88bb3" binding="panelLlista">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -42,7 +26,30 @@
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font name="Times New Roman" size="20" style="1"/>
+          <horizontalTextPosition value="11"/>
+          <icon value="prog2/vista/Iconos/home.png"/>
           <text value="Tornar"/>
+        </properties>
+      </component>
+      <component id="45ccd" class="javax.swing.JButton" binding="btnvisualitzarUsuaris">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Times New Roman" size="20" style="1"/>
+          <icon value="prog2/vista/Iconos/mostrarUsuari.png"/>
+          <text value="Visualitzar usuaris"/>
+        </properties>
+      </component>
+      <component id="5e0fe" class="javax.swing.JButton" binding="btnafegirUsuaris">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Times New Roman" size="20" style="1"/>
+          <icon value="prog2/vista/Iconos/afegirusuari.png"/>
+          <text value="Afegir usuaris"/>
         </properties>
       </component>
     </children>

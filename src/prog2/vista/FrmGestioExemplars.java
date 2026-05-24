@@ -8,6 +8,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Autors: Junjie Zhou, Majda Boulbourki
+ *
+ *
+ */
 public class FrmGestioExemplars extends JDialog {
     private JPanel panelGestioExemplars;
     private JButton btnAfegir;
@@ -29,7 +34,7 @@ public class FrmGestioExemplars extends JDialog {
         setLocationRelativeTo(null);
         setSize(500,500);
         panelLlista.setVisible(false);
-
+        decorar();
         btnAfegir.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
@@ -83,5 +88,12 @@ public class FrmGestioExemplars extends JDialog {
         }else{
             llisExem.setListData(adaptador.recuperaExemplars().toArray());
         }
+    }
+
+    private void decorar(){
+        btnAfegir.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        btnMostrar.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        btnSortir.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        llisExem.setFixedCellHeight(25);
     }
 }

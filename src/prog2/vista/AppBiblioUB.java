@@ -7,6 +7,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Autors: Junjie Zhou, Majda Boulbourki
+ *
+ *
+ */
 public class AppBiblioUB extends JFrame {
     private JPanel panelPrincipal;
     private JButton btnGestioUsuaris;
@@ -23,10 +28,11 @@ public class AppBiblioUB extends JFrame {
         //try {for(int i = 0; i< 10; i++){adaptador.afegirExemplar("Id"+i,"Tit"+i,"Aut"+i,i%2 == 0);adaptador.afegirUsuari("Mail"+i,"Nom"+i,"Adr"+i,i%2 ==0);}adaptador.afegirPrestec(1,1,false);} catch (Exception e){System.err.println("Error inesperat:" + e.getMessage());}
         add(panelPrincipal);
         setTitle("Biblio");
-        setSize(550, 500);
+        setSize(450, 350);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+        decorarBoton();
         btnGestioUsuaris.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
@@ -106,6 +112,20 @@ public class AppBiblioUB extends JFrame {
                 System.exit(0);
             }
         });
+    }
+
+    private void decorarBoton() {
+        btnGestioUsuaris.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        btnGestioExemplars.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        btnGestioPrestecs.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        btnGuardar.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        btnCarregar.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        btnSortir.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        btnGestioUsuaris.setBackground(new Color(105, 105, 105));
+        btnGestioExemplars.setBackground(new Color(105, 105, 105));
+        btnGestioPrestecs.setBackground(new Color(105, 105, 105));
+        btnCarregar.setBackground(new Color(105, 105, 105));
+        btnSortir.setBackground(new Color(105, 105, 105));
     }
 
 
