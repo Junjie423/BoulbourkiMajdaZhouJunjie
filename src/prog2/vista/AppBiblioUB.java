@@ -121,11 +121,6 @@ public class AppBiblioUB extends JFrame {
         btnGuardar.setFont(new Font("Times New Roman", Font.BOLD, 20));
         btnCarregar.setFont(new Font("Times New Roman", Font.BOLD, 20));
         btnSortir.setFont(new Font("Times New Roman", Font.BOLD, 20));
-        btnGestioUsuaris.setBackground(new Color(105, 105, 105));
-        btnGestioExemplars.setBackground(new Color(105, 105, 105));
-        btnGestioPrestecs.setBackground(new Color(105, 105, 105));
-        btnCarregar.setBackground(new Color(105, 105, 105));
-        btnSortir.setBackground(new Color(105, 105, 105));
     }
 
 
