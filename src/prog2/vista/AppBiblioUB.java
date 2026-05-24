@@ -184,12 +184,14 @@ public class AppBiblioUB extends JFrame {
             Thread.sleep(2000);// Espera dos segon
             benvinguda.setLocationRelativeTo(null);
             benvinguda.setVisible(true);
-            while(true){
+            for(int i = 0; i < 6; i++){
                 hola.setIcon(new ImageIcon(getClass().getResource("/prog2/vista/Iconos/mano2.png")));
                 Thread.sleep(500);
                 hola.setIcon(new ImageIcon(getClass().getResource("/prog2/vista/Iconos/mano.png")));
                 Thread.sleep(500);
             }
+            Thread.sleep(500);
+            benvinguda.dispose();
 
         } catch (Exception ex) {
             // Mai passarà
