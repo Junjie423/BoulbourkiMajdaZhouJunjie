@@ -94,7 +94,7 @@ public class AppBiblioUB extends JFrame {
                         JOptionPane.showMessageDialog(btnGuardar, "Dades guardades correctament", "Guardar Dades", JOptionPane.INFORMATION_MESSAGE);
                     } catch (BiblioException ex) {
                         // Llença un JOptionPane amb el missatge d'error
-                        JOptionPane.showMessageDialog(btnGuardar, ex.getMessage(), "Guardar dades", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(w, ex.getMessage(), "Guardar dades", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -116,7 +116,7 @@ public class AppBiblioUB extends JFrame {
                         JOptionPane.showMessageDialog(btnCarregar,"Dades carregades correctament", "Carregar Dades", JOptionPane.INFORMATION_MESSAGE);
                     } catch (BiblioException ex) {
                         // Llença un JOptionPane amb el missatge d'error
-                        JOptionPane.showMessageDialog(btnCarregar, ex.getMessage(), "Carregar dades", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(w, ex.getMessage(), "Carregar dades", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
