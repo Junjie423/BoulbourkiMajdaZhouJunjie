@@ -42,7 +42,6 @@ public class FrmAfegirUsuari extends JDialog {
         setTitle("Afegir Usuari");
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         getRootPane().setDefaultButton(btnOk);
-        setLocationRelativeTo(null);
         decorar();
 
         // KeyListener pels JTextField per tal que quan estiguin omplerts habiliti el botó acceptar
@@ -78,6 +77,8 @@ public class FrmAfegirUsuari extends JDialog {
                 onCancel();
             }
         });
+        setLocationRelativeTo(null);
+        setVisible(true);
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
