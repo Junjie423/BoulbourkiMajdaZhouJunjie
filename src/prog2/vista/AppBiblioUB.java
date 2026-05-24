@@ -181,7 +181,7 @@ public class AppBiblioUB extends JFrame {
             panel.add(tancarBtn,BorderLayout.SOUTH);
 
             //Saludar
-            Thread.sleep(1500);// Espera un segon
+            Thread.sleep(2000);// Espera dos segon
             benvinguda.setLocationRelativeTo(null);
             benvinguda.setVisible(true);
             while(true){
