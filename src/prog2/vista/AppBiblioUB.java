@@ -10,6 +10,9 @@ import java.awt.event.ActionListener;
 /**
  * Autors: Junjie Zhou, Majda Boulbourki
  *
+ * La classe AppBiblioUB, hereta de JFrame i serà la finestra principal, que tindrà
+ * botons per obrir altres finestres per gestionar Usuaris, exemplars, Préstecs i
+ * per Guardar i Carregar dades de fitxers.
  *
  */
 public class AppBiblioUB extends JFrame {
@@ -21,13 +24,14 @@ public class AppBiblioUB extends JFrame {
     private JButton btnCarregar;
     private JButton btnSortir;
 
+    // Es crea un objecte adaptador que es passa per paràmetre a les altres finestres
     private Adaptador adaptador;
+    // Es guarda la finestra per poder congelar-la mentre està obert una "sub-finestra" que aquest crea.
     private Window w = this;
     public AppBiblioUB() {
         adaptador = new Adaptador();
-        //try {for(int i = 0; i< 10; i++){adaptador.afegirExemplar("Id"+i,"Tit"+i,"Aut"+i,i%2 == 0);adaptador.afegirUsuari("Mail"+i,"Nom"+i,"Adr"+i,i%2 ==0);}adaptador.afegirPrestec(1,1,false);} catch (Exception e){System.err.println("Error inesperat:" + e.getMessage());}
         add(panelPrincipal);
-        setTitle("Biblio");
+        setTitle("Biblioteca UB");
         setSize(450, 350);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,7 +39,7 @@ public class AppBiblioUB extends JFrame {
         decorarBoton();
         btnGestioUsuaris.addActionListener(new ActionListener() {
             /**
-             * Invoked when an action occurs.
+             * Crea una finestra de tipus FrmGestioUsuaris quan es prem el botó
              *
              * @param e the event to be processed
              */
@@ -46,7 +50,7 @@ public class AppBiblioUB extends JFrame {
         });
         btnGestioExemplars.addActionListener(new ActionListener() {
             /**
-             * Invoked when an action occurs.
+             * Crea una finestra de tipus FrmGestioExemplars quan es prem el botó
              *
              * @param e the event to be processed
              */
@@ -57,7 +61,7 @@ public class AppBiblioUB extends JFrame {
         });
         btnGestioPrestecs.addActionListener(new ActionListener() {
             /**
-             * Invoked when an action occurs.
+             * Crea una finestra de tipus FrmGestioPrestecs quan es prem el botó
              *
              * @param e the event to be processed
              */
@@ -68,7 +72,8 @@ public class AppBiblioUB extends JFrame {
         });
         btnGuardar.addActionListener(new ActionListener() {
             /**
-             * Invoked when an action occurs.
+             * Crea un JFileChooser per guardar el fitxer escollit i cridar la funció de guardarDades
+             * d'adaptador amb el path guardat.
              *
              * @param e the event to be processed
              */
@@ -88,7 +93,8 @@ public class AppBiblioUB extends JFrame {
         });
         btnCarregar.addActionListener(new ActionListener() {
             /**
-             * Invoked when an action occurs.
+             * Crea un JFileChooser per guardar el fitxer escollit i cridar la funció de carregaDades
+             * d'adaptador amb el path guardat.
              *
              * @param e the event to be processed
              */
@@ -107,6 +113,11 @@ public class AppBiblioUB extends JFrame {
             }
         });
         btnSortir.addActionListener(new ActionListener() {
+            /**
+             * Surt del programa quan es prem el botó
+             *
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
@@ -114,6 +125,9 @@ public class AppBiblioUB extends JFrame {
         });
     }
 
+    /**
+     * Mètode que canvia la dont de lletra dels botons
+     */
     private void decorarBoton() {
         btnGestioUsuaris.setFont(new Font("Times New Roman", Font.BOLD, 20));
         btnGestioExemplars.setFont(new Font("Times New Roman", Font.BOLD, 20));

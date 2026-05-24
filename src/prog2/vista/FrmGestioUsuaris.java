@@ -32,6 +32,7 @@ public class FrmGestioUsuaris extends JDialog {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(500,500);
         setLocationRelativeTo(null);
+        setTitle("Gestio Usuaris");
         panelLlista.setVisible(false);
         decorar();
         btnafegirUsuaris.addActionListener(new ActionListener() {

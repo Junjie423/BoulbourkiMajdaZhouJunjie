@@ -10,6 +10,8 @@ import java.awt.event.*;
 /**
  * Autors: Junjie Zhou, Majda Boulbourki
  *
+ * Aquesta classe hereta de JDialog i té botons per mostar la llista d'usuaris (mostrar el panel amb la JList),
+ * afegir usuaris, i tornar a la finestra principal (tancar).
  *
  */
 public class FrmAfegirExemplar extends JDialog {
@@ -26,7 +28,7 @@ public class FrmAfegirExemplar extends JDialog {
 
     private Adaptador adaptador;
     public FrmAfegirExemplar(Adaptador adp, Window pare) {
-        super(pare, ModalityType.APPLICATION_MODAL);
+        super(pare, ModalityType.APPLICATION_MODAL); // Fa que la finestra anterior estigui bloquejat fins tancar aquesta
         adaptador = adp;
         setContentPane(panelAfegir);
         setModal(true);
