@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 /**
  * Autors: Junjie Zhou, Majda Boulbourki
@@ -28,6 +30,10 @@ public class AppBiblioUB extends JFrame {
     private Adaptador adaptador;
     // Es guarda la finestra per poder congelar-la mentre està obert una "sub-finestra" que aquest crea.
     private Window w = this;
+
+    /**
+     * Constructor que inicialitza l'AppBiblioUB
+     */
     public AppBiblioUB() {
         adaptador = new Adaptador();
         add(panelPrincipal);
@@ -37,6 +43,7 @@ public class AppBiblioUB extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         decorarBoton();
+        benvinguda();
         btnGestioUsuaris.addActionListener(new ActionListener() {
             /**
              * Crea una finestra de tipus FrmGestioUsuaris quan es prem el botó
@@ -86,6 +93,7 @@ public class AppBiblioUB extends JFrame {
                         adaptador.guardaDades(chooser.getSelectedFile().getAbsolutePath());
                         JOptionPane.showMessageDialog(btnGuardar, "Dades guardades correctament", "Guardar Dades", JOptionPane.INFORMATION_MESSAGE);
                     } catch (BiblioException ex) {
+                        // Llença un JOptionPane amb el missatge d'error
                         JOptionPane.showMessageDialog(btnGuardar, ex.getMessage(), "Guardar dades", JOptionPane.ERROR_MESSAGE);
                     }
                 }
@@ -107,6 +115,7 @@ public class AppBiblioUB extends JFrame {
                         adaptador.carregaDades(chooser.getSelectedFile().getAbsolutePath());
                         JOptionPane.showMessageDialog(btnCarregar,"Dades carregades correctament", "Carregar Dades", JOptionPane.INFORMATION_MESSAGE);
                     } catch (BiblioException ex) {
+                        // Llença un JOptionPane amb el missatge d'error
                         JOptionPane.showMessageDialog(btnCarregar, ex.getMessage(), "Carregar dades", JOptionPane.ERROR_MESSAGE);
                     }
                 }
@@ -135,6 +144,59 @@ public class AppBiblioUB extends JFrame {
         btnGuardar.setFont(new Font("Times New Roman", Font.BOLD, 20));
         btnCarregar.setFont(new Font("Times New Roman", Font.BOLD, 20));
         btnSortir.setFont(new Font("Times New Roman", Font.BOLD, 20));
+    }
+
+    /**
+     *
+     * JDialog Mètode que dona la benvinguda després de 1,5s en iniciar AppBiblioUB i
+     * tanca la finestra amb el missatge després de 3 segons.
+     */
+    private void benvinguda() {
+        new Thread(()->{try{
+            JDialog benvinguda = new JDialog();
+            JPanel panel = new JPanel();
+            panel.setLayout(new BorderLayout());
+            JButton tancarBtn = new JButton("Som-hi!");
+
+            //Finestra
+            benvinguda.setVisible(false);
+            benvinguda.setTitle("Benvinguda");
+            benvinguda.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            benvinguda.setResizable(false);
+            benvinguda.setLayout(new BorderLayout());
+            benvinguda.setSize(new Dimension(500, 200));
+
+            //Label
+            JLabel hola = new JLabel("Benvingut/da a l'App de la Biblioteca UB", SwingConstants.CENTER);
+            hola.setFont(new Font("Times New Roman", Font.BOLD, 20));
+
+            //Bottom
+            tancarBtn.setFont(new Font("Times New Roman", Font.BOLD, 20));
+            tancarBtn.addActionListener(e-> benvinguda.dispose());
+            tancarBtn.setIcon(new ImageIcon(getClass().getResource("/prog2/vista/Iconos/go.png")));
+
+            //Panel
+            panel.add(hola,BorderLayout.CENTER);
+            benvinguda.add(panel);
+            panel.add(tancarBtn,BorderLayout.SOUTH);
+
+            //Saludar
+            Thread.sleep(1500);// Espera un segon
+            benvinguda.setLocationRelativeTo(null);
+            benvinguda.setVisible(true);
+            while(true){
+                hola.setIcon(new ImageIcon(getClass().getResource("/prog2/vista/Iconos/mano2.png")));
+                Thread.sleep(500);
+                hola.setIcon(new ImageIcon(getClass().getResource("/prog2/vista/Iconos/mano.png")));
+                Thread.sleep(500);
+            }
+
+        } catch (Exception ex) {
+            // Mai passarà
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Benvinguda", JOptionPane.ERROR_MESSAGE);
+        }
+        }).start();
+
     }
 
 

@@ -10,7 +10,8 @@ import java.awt.event.*;
 /**
  * Autors: Junjie Zhou, Majda Boulbourki
  *
- *
+ * Aquesta classe hereta de JDialog i demana a l'usuari introduir en els JTextField les dades de l'usuari a afegir,
+ * té un JCombobox per assignar si és estudiant o no (professor) i crida el mètode afegirUsuari de l'adaptador.
  */
 public class FrmAfegirUsuari extends JDialog {
     private JPanel contentPane;
@@ -25,8 +26,14 @@ public class FrmAfegirUsuari extends JDialog {
     private JCheckBox checkStudent;
 
     private Adaptador adaptador;
+
+    /**
+     * Constructor que inicialitza la finestra per afegir Usuaris
+     * @param adp
+     * @param pare
+     */
     public FrmAfegirUsuari(Adaptador adp, Window pare) {
-        super(pare, ModalityType.APPLICATION_MODAL);
+        super(pare, ModalityType.APPLICATION_MODAL); // Congela la finestra que l'ha creat fins que aquest estigui tancat
         adaptador = adp;
         setContentPane(contentPane);
         setModal(true);
@@ -38,23 +45,35 @@ public class FrmAfegirUsuari extends JDialog {
         setLocationRelativeTo(null);
         decorar();
 
+        // KeyListener pels JTextField per tal que quan estiguin omplerts habiliti el botó acceptar
         KeyListener checkBuits = new KeyAdapter() {
             public void keyReleased(KeyEvent e) {
                 btnOk.setEnabled((!tNom.getText().isEmpty() && !tEmail.getText().isEmpty() && !tAdreca.getText().isEmpty()));
             }
         };
 
+        // Afegir el KeyListener als JTExtFields
         tNom.addKeyListener(checkBuits);
         tEmail.addKeyListener(checkBuits);
         tAdreca.addKeyListener(checkBuits);
 
         btnOk.addActionListener(new ActionListener() {
+            /**
+             * Mètode que crida al mètode onOK()
+             * @param e the event to be processed
+             */
+            @Override
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
 
         btnCancelar.addActionListener(new ActionListener() {
+            /**
+             * Mètode que crida al mètode onCancel()
+             * @param e the event to be processed
+             */
+            @Override
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
@@ -68,10 +87,6 @@ public class FrmAfegirUsuari extends JDialog {
             }
         });
 
-        // Escoltador pels JTextField per tal que quan estiguin omplerts habiliti el botó acceptar
-
-
-
         // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -80,6 +95,10 @@ public class FrmAfegirUsuari extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
+    /**
+     * Mètode que comprova que els JTextField no estiguin en blanc i que hi hagui '@' en l'email.
+     * Un cop correctes, crida el mètode afegirUsuari de l'adaptador amb les dades introduïdes.
+     */
     private void onOK() {
         try {
             if (tNom.getText().isBlank() || tEmail.getText().isBlank() || tAdreca.getText().isBlank()) {
@@ -91,6 +110,7 @@ public class FrmAfegirUsuari extends JDialog {
             adaptador.afegirUsuari(tEmail.getText(), tNom.getText(), tAdreca.getText(), checkStudent.isSelected());
             dispose();
         }catch (BiblioException e) {
+            // Llença un JOptionPane amb el missatge d'error
             JOptionPane.showMessageDialog(this, e.getMessage(), "Afegir Usuari", JOptionPane.ERROR_MESSAGE);
         }
     }

@@ -11,7 +11,8 @@ import java.awt.event.ActionListener;
 /**
  * Autors: Junjie Zhou, Majda Boulbourki
  *
- *
+ * Aquesta classe hereta de JDialog i té botons per mostar la llista d'exemplars (mostrar el panel amb la JList),
+ * afegir exemplars, i tornar a la finestra principal (tancar).
  */
 public class FrmGestioExemplars extends JDialog {
     private JPanel panelGestioExemplars;
@@ -24,6 +25,12 @@ public class FrmGestioExemplars extends JDialog {
 
     private Window w = this;
     private static final String[] defecte = {"No hi ha cap exemplar a la llista"};
+
+    /**
+     * Constructor que inicialitza la finestra de gestió Exemplars.
+     * @param adp
+     * @param pare
+     */
     public FrmGestioExemplars(Adaptador adp, Window pare){
         super(pare, ModalityType.APPLICATION_MODAL); // Bloqueja l'anterior (la finestra pare) mentre està obert
         add(panelGestioExemplars);
@@ -37,28 +44,29 @@ public class FrmGestioExemplars extends JDialog {
         decorar();
         btnAfegir.addActionListener(new ActionListener() {
             /**
-             * Invoked when an action occurs.
+             * Crea un FrmAfegirExemplar i quan aquest es tanca, actualitza la llista.
              *
              * @param e the event to be processed
              */
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmAfegirExemplar frmAfegirExemplar = new FrmAfegirExemplar(adaptador, w);
-                actualizaLlista();
+                actualitzaLlista();
             }
         });
 
         btnMostrar.addActionListener(new ActionListener() {
             /**
-             * Invoked when an action occurs.
+             * Mostra el panel amb la Llista quan el botó és Mostrar Exemplar i ho amaga quan el text del botó
+             * és Amagar Exemplar
              *
              * @param e the event to be processed
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Mostrarà la llista amb els exemplars
+                // Mostrarà la llista amb els exemplars (actualitza la llista abans de mostrarla
                 if (btnMostrar.getText().equals("Mostrar Exemplar")) {
-                    actualizaLlista();
+                    actualitzaLlista();
                     panelLlista.setVisible(true);
                     btnMostrar.setText("Amagar Exemplar");
                 }else{
@@ -70,7 +78,7 @@ public class FrmGestioExemplars extends JDialog {
         });
         btnSortir.addActionListener(new ActionListener() {
             /**
-             * Invoked when an action occurs.
+             * Tanca la finestra.
              *
              * @param e the event to be processed
              */
@@ -82,14 +90,21 @@ public class FrmGestioExemplars extends JDialog {
         setVisible(true);
     }
 
-    private void actualizaLlista(){
+    /**
+     * Mètode que actualitza la llista
+     */
+    private void actualitzaLlista(){
         if (adaptador.recuperaExemplars().isEmpty()) {
+            // Si està buida la llista, llavors apareix el missatge de defecte
             llisExem.setListData(defecte);
         }else{
             llisExem.setListData(adaptador.recuperaExemplars().toArray());
         }
     }
 
+    /**
+     * Mètode que assigna la font als botons i crea espai entre cel·les de la llista
+     */
     private void decorar(){
         btnAfegir.setFont(new Font("Times New Roman", Font.BOLD, 20));
         btnMostrar.setFont(new Font("Times New Roman", Font.BOLD, 20));

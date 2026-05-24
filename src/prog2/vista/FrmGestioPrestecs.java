@@ -10,7 +10,8 @@ import java.awt.event.ActionListener;
 /**
  * Autors: Junjie Zhou, Majda Boulbourki
  *
- *
+ * Aquesta classe hereta de JDialog i té botons per mostar la llista de préstecs (mostrar el panel amb la JList),
+ * afegir préstecs, retornar préstec i tornar a la finestra principal (tancar).
  */
 public class FrmGestioPrestecs extends JDialog {
 
@@ -27,6 +28,12 @@ public class FrmGestioPrestecs extends JDialog {
 
     private Window w = this;
     private static final String[] defecte = {"No hi ha cap prestec a la llista"};
+
+    /**
+     * Constructor que inicialitza la finestra per gestió Prestecs
+     * @param adp
+     * @param pare
+     */
     public FrmGestioPrestecs(Adaptador adp, Window pare) {
         super(pare, ModalityType.APPLICATION_MODAL);
         add(panelGestioPrestecs);
@@ -38,11 +45,13 @@ public class FrmGestioPrestecs extends JDialog {
         panelMostrar.setVisible(false);
         decorar();
         btnMostrar.addActionListener(new ActionListener() {
-
+            /**
+             * Mètode que crida a actualitzaLlista i mostra o amaga el panel amb la llista
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Si s'ha pres el checkbox:
-                actualizaLlista();
+                actualitzaLlista();
                 if (btnMostrar.getText().equals("Visualitzar préstecs")) {
                     panelMostrar.setVisible(true);
                     btnMostrar.setText("Amagar préstecs");
@@ -53,36 +62,54 @@ public class FrmGestioPrestecs extends JDialog {
             }
         });
         btnAfegir.addActionListener(new ActionListener() {
-
+            /**
+             * Mètode que crea un FrmAfegirPrestec i després actualitza la llista
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmAfegirPrestec frmAfegirPrestec = new FrmAfegirPrestec(adaptador, w);
-                actualizaLlista();
+                actualitzaLlista();
             }
         });
 
         checkMostrarNoRetornats.addActionListener(new ActionListener() {
+            /**
+             * Mètode crida a actualitzaLlista()
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
-                actualizaLlista();
+                actualitzaLlista();
             }
         });
         btnRetornar.addActionListener(new ActionListener() {
+            /**
+             * Mètode que crida retornarPrestes de l'adaptador amb l'índex del préstec escollit de la llista
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
+                    // Si no s'escull cap llista, llença excepció
                     if (llistaPrestecs.getSelectedIndex() == -1){
                         throw new BiblioException("No hi ha cap prestec seleccionat");
                     }
                     adaptador.retornarPrestec(llistaPrestecs.getSelectedIndex());
                     JOptionPane.showMessageDialog(null, "S'ha retornat correctament el préstec", "Retornar Prestec", JOptionPane.INFORMATION_MESSAGE);
                 } catch (BiblioException ex){
+                    // Crea un JOpinionPane amb l'error.
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "Retornar Prestec", JOptionPane.ERROR_MESSAGE);
                 }
-                actualizaLlista();
+                // Actualitza la llista
+                actualitzaLlista();
             }
         });
         btnTornar.addActionListener(new ActionListener() {
+            /**
+             * Mètode que tanca la finestra
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
@@ -91,7 +118,10 @@ public class FrmGestioPrestecs extends JDialog {
         setVisible(true);
     }
 
-    private void actualizaLlista(){
+    /**
+     * Mètode que actualitza la llista segons si el CheckBox estè pres o no
+     */
+    private void actualitzaLlista(){
         if(checkMostrarNoRetornats.isSelected()){
             if (adaptador.recuperaPrestecsNoRetornats().isEmpty()){
                 llistaPrestecs.setListData(defecte);
@@ -107,6 +137,9 @@ public class FrmGestioPrestecs extends JDialog {
         }
     }
 
+    /**
+     * Mètode que assigna la font dels botons i fixa el marge entre les cel·les de la llista
+     */
     private void decorar(){
         btnMostrar.setFont(new Font("Times New Roman", Font.BOLD, 20));
         btnAfegir.setFont(new Font("Times New Roman", Font.BOLD, 20));

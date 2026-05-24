@@ -10,8 +10,8 @@ import java.awt.event.*;
 /**
  * Autors: Junjie Zhou, Majda Boulbourki
  *
- * Aquesta classe hereta de JDialog i té botons per mostar la llista d'usuaris (mostrar el panel amb la JList),
- * afegir usuaris, i tornar a la finestra principal (tancar).
+ * Aquesta classe hereta de JDialog i té tres espais per introduir dades, un JCheckBox per assignar
+ * si pot permetre prestecs llars i amb les dades, crida el mètode afegirExemplar d'adaptador.
  *
  */
 public class FrmAfegirExemplar extends JDialog {
@@ -27,8 +27,14 @@ public class FrmAfegirExemplar extends JDialog {
     private JLabel lAutor;
 
     private Adaptador adaptador;
+
+    /**
+     * Constructor que inicialitza la finestra per afegir Exemplars
+     * @param adp
+     * @param pare
+     */
     public FrmAfegirExemplar(Adaptador adp, Window pare) {
-        super(pare, ModalityType.APPLICATION_MODAL); // Fa que la finestra anterior estigui bloquejat fins tancar aquesta
+        super(pare, ModalityType.APPLICATION_MODAL); // Fa que la finestra anterior estigui bloquejada fins tancar aquesta
         adaptador = adp;
         setContentPane(panelAfegir);
         setModal(true);
@@ -39,24 +45,38 @@ public class FrmAfegirExemplar extends JDialog {
         setLocationRelativeTo(null);
         btnOk.setEnabled(false);
         decorar();
+        // Creem un KeyListener que desbloqueja el botó Ok quan els JTextField estiguin buits
         KeyListener checkBuits = new KeyAdapter() {
             public void keyReleased(KeyEvent e) {
                     btnOk.setEnabled((!tID.getText().isEmpty() && !tTitol.getText().isEmpty() && !tAutor.getText().isEmpty()));
             }
         };
 
+        // Afegim el KeyListener als JTextFields
         tID.addKeyListener(checkBuits);
         tTitol.addKeyListener(checkBuits);
         tAutor.addKeyListener(checkBuits);
 
 
         btnOk.addActionListener(new ActionListener() {
+            /**
+             * Aquest mètode crida al mètode onOK()
+             *
+             * @param e the event to be processed
+             */
+            @Override
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
 
         btnCancel.addActionListener(new ActionListener() {
+            /**
+             * Aquest mètode crida al mètode onCancel()
+             *
+             * @param e the event to be processed
+             */
+            @Override
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
@@ -80,7 +100,12 @@ public class FrmAfegirExemplar extends JDialog {
         setVisible(true);
     }
 
+    /**
+     * Mètode que comprova que els JFields no estiguin en blancs. Si tot està correcte crida el mètode
+     * afegirExemplar de l'adaptador amb les dades que l'usuari introdueix en els JTextField.
+     */
     private void onOK() {
+
         try {
             if (tID.getText().isBlank() || tTitol.getText().isBlank() || tAutor.getText().isBlank()) {
                 throw new BiblioException("Hi ha camps per omplir encara");
@@ -88,14 +113,21 @@ public class FrmAfegirExemplar extends JDialog {
             adaptador.afegirExemplar(tID.getText(), tTitol.getText(), tAutor.getText(), pLlarg.isSelected());
             dispose();
         }catch (BiblioException e) {
+            // Llença un JOptionPane amb el missatge d'error
             JOptionPane.showMessageDialog(this, e.getMessage(), "Afegir Exemplar", JOptionPane.ERROR_MESSAGE);
         }
     }
 
+    /**
+     * Mètode que tanca la finestra
+     */
     private void onCancel() {
         dispose();
     }
 
+    /**
+     * Mètode que assigna la font dels botons, els JLabel i decora els JTextFields
+     */
     private void decorar(){
         btnOk.setFont(new Font("Times New Roman", Font.BOLD, 16));
         btnCancel.setFont(new Font("Times New Roman", Font.BOLD, 16));
